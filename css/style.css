@@ -51,14 +51,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 80px;
-}
+            background:
+                linear-gradient(135deg, rgba(16, 17, 17, 0.65) 0%, rgba(8, 8, 8, 0.55) 100%),
+                url('https://www.polibatam.ac.id/wp-content/uploads/2022/04/MG_8893-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
 
 .btn-primary {
     background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
