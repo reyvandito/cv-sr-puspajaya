@@ -18,302 +18,8 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     
-    <style>
-        :root {
-            --primary-dark: #8B0000;
-            --primary-light: #FF6B6B;
-            --secondary: #000000;
-            --dark-red: #8B0000;
-            --light-red: #FF6B6B;
-            --gray-bg: #f8f9fa;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #333;
-            overflow-x: hidden;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-        }
-        
-        .navbar-brand {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-        }
-        
-        .navbar-brand span {
-            color: var(--primary-dark);
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            margin: 0 8px;
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
-            bottom: 0;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-        
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
-            border: none;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
-        }
-        
-        .section-title {
-            position: relative;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #eee;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        /* Slider Styles */
-        .carousel-item {
-            height: 500px;
-        }
-        
-        .carousel-item img {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-        }
-        
-        .carousel-caption {
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-        }
-        
-        .client-logo {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            border: 1px solid #eee;
-        }
-        
-        .client-logo:hover {
-            transform: translateY(-5px);
-        }
-        
-        .client-logo img {
-            max-height: 80px;
-            max-width: 100%;
-        }
-        
-        .contact-info-box {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            height: 100%;
-            border: 1px solid #eee;
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        footer {
-            background: #222;
-            color: white;
-        }
-        
-        .footer-logo {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-        
-        .footer-logo span {
-            color: var(--primary-light);
-        }
-        
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: block;
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-light);
-        }
-        
-        .social-icons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: #333;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            margin-right: 10px;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .social-icons a:hover {
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
-            transform: translateY(-3px);
-        }
-        
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .back-to-top.active {
-            opacity: 1;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-section {
-                min-height: 80vh;
-                text-align: center;
-            }
-            
-            .carousel-item {
-                height: 300px;
-            }
-            
-            .navbar-collapse {
-                background: white;
-                padding: 20px;
-                border-radius: 10px;
-                margin-top: 10px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-        }
-        
-        /* Custom animations */
-        .fade-in {
-            animation: fadeIn 1s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Logo styling */
-        .company-logo {
-            max-height: 50px;
-            width: auto;
-        }
-        
-        /* About image styling */
-        .about-img {
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -321,7 +27,7 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <!-- Logo Image -->
-                <img src="images/logo.png" alt="CV SR PUSPA JAYA" class="company-logo me-2">
+                <img src="" alt="CV SR PUSPA JAYA" class="company-logo me-2">
                 CV <span class="ms-1">SR PUSPA JAYA</span>
             </a>
             
@@ -559,8 +265,9 @@
             <div class="row g-4">
                 <!-- Client 1 -->
                 <div class="col-lg-3 col-md-6">
-                    <div class="client-logo">
-                        <img src="images/alfamart.png" alt="Alfamart" class="img-fluid">
+                    <div class="client-logo text-center">
+                        <img src="images/logo_alfamart.jpg" alt="Alfamart" class="img-fluid mb-2">
+                        <p class="text-muted mb-0">PT. Alfaria Trijaya</p>
                     </div>
                 </div>
                 
@@ -568,7 +275,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="client-logo">
                         <div class="text-center">
-                            <h4 class="fw-bold" style="color: var(--primary-dark);">Client 2</h4>
+                            <h4 class="fw-bold client-name">Client 2</h4>
                             <p class="text-muted mb-0">Mitra Kerjasama</p>
                         </div>
                     </div>
@@ -578,7 +285,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="client-logo">
                         <div class="text-center">
-                            <h4 class="fw-bold" style="color: var(--primary-dark);">Client 3</h4>
+                            <h4 class="fw-bold client-name">Client 3</h4>
                             <p class="text-muted mb-0">Mitra Kerjasama</p>
                         </div>
                     </div>
@@ -588,7 +295,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="client-logo">
                         <div class="text-center">
-                            <h4 class="fw-bold" style="color: var(--primary-dark);">Client 4</h4>
+                            <h4 class="fw-bold client-name">Client 4</h4>
                             <p class="text-muted mb-0">Mitra Kerjasama</p>
                         </div>
                     </div>
@@ -614,7 +321,6 @@
                         </div>
                         <h4 class="fw-bold mb-3">Alamat Kami</h4>
                         <p class="text-muted mb-4">
-                            <!-- GANTI ALAMAT DI SINI -->
                             Jl. Contoh No. 123, Kota, Kepulauan Riau, Indonesia
                         </p>
                         
@@ -623,7 +329,6 @@
                         </div>
                         <h4 class="fw-bold mb-3">Telepon / WhatsApp</h4>
                         <p class="text-muted mb-4">
-                            <!-- GANTI NOMOR TELEPON DI SINI -->
                             +62 812-3456-7890
                         </p>
                         
@@ -632,7 +337,6 @@
                         </div>
                         <h4 class="fw-bold mb-3">Email</h4>
                         <p class="text-muted">
-                            <!-- GANTI EMAIL DI SINI -->
                             info@srpuspajaya.com
                         </p>
                     </div>
@@ -757,79 +461,7 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Back to top button
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('active');
-            } else {
-                backToTop.classList.remove('active');
-            }
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Update active nav link
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                }
-            });
-        });
-        
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would typically send the data to a server
-            // For now, we'll just show an alert
-            alert(`Terima kasih ${name}! Pesan Anda telah berhasil dikirim. Kami akan menghubungi Anda di ${phone} atau ${email} segera.`);
-            
-            // Reset form
-            this.reset();
-        });
-        
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
-        });
-        
-        // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-    </script>
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
 </body>
 </html>
