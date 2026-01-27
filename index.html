@@ -31,7 +31,7 @@
                 CV <span class="ms-1">SR PUSPA JAYA</span>
             </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -63,16 +63,16 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container">
-            <div class="row align-items-center">
-                
-                    <h1 class="display-4 fw-bold text-white mb-4">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-8 col-md-10 col-sm-12 text-center">
+                    <h1 class="display-5 display-md-4 fw-bold text-white mb-4">
                         Solusi Teralis & Reklame <span class="text-warning">Profesional</span>
                     </h1>
-                    <p class="lead">
+                    <p class="lead text-white mb-4 px-3">
                         CV SR PUSPA JAYA menyediakan jasa pemasangan teralis, properti toko, dan pembuatan reklame berkualitas tinggi dengan harga kompetitif. Melayani wilayah Kepri dan sekitarnya.
                     </p>
-                    <div class="mt-4">
-                        <a href="#contact" class="btn btn-primary btn-lg">
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4">
+                        <a href="#contact" class="btn btn-primary btn-lg mb-2 mb-sm-0">
                             <i class="bi bi-whatsapp me-2"></i> Hubungi Kami
                         </a>
                         <a href="#services" class="btn btn-outline-light btn-lg">
@@ -80,7 +80,7 @@
                         </a>
                     </div>
                 </div>
-            
+            </div>
         </div>
     </section>
 
@@ -103,16 +103,16 @@
                     <p class="mb-4">
                         Komitmen kami adalah memberikan hasil kerja yang berkualitas, tepat waktu, dan sesuai dengan kebutuhan klien. Tim kami terdiri dari tenaga profesional yang berpengalaman dan menggunakan material terbaik untuk setiap proyek.
                     </p>
-                    <div class="d-flex align-items-center">
-                        <div class="me-4">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="text-center mb-3 mb-sm-0 me-2">
                             <h4 class="fw-bold text-danger">100+</h4>
                             <p class="text-muted">Proyek Selesai</p>
                         </div>
-                        <div class="me-4">
+                        <div class="text-center mb-3 mb-sm-0 me-2">
                             <h4 class="fw-bold text-danger">5+</h4>
                             <p class="text-muted">Tahun Pengalaman</p>
                         </div>
-                        <div>
+                        <div class="text-center">
                             <h4 class="fw-bold text-danger">50+</h4>
                             <p class="text-muted">Klien Puas</p>
                         </div>
@@ -209,8 +209,8 @@
                     <div class="carousel-item active">
                         <img src="images/portfolio/project1.jpg" class="d-block w-100" alt="Proyek Teralis 1">
                         <div class="carousel-caption">
-                            <h5 class="fs-3">Pemasangan Teralis Rumah</h5>
-                            <p>Teralis besi dengan desain modern dan minimalis</p>
+                            <h5 class="fs-4 fs-md-3">Pemasangan Teralis Rumah</h5>
+                            <p class="d-none d-sm-block">Teralis besi dengan desain modern dan minimalis</p>
                         </div>
                     </div>
                     
@@ -218,8 +218,8 @@
                     <div class="carousel-item">
                         <img src="images/portfolio/project2.jpg" class="d-block w-100" alt="Proyek Toko">
                         <div class="carousel-caption">
-                            <h5 class="fs-3">Properti Toko Alfamart</h5>
-                            <p>Pemasangan etalase dan partisi toko</p>
+                            <h5 class="fs-4 fs-md-3">Properti Toko Alfamart</h5>
+                            <p class="d-none d-sm-block">Pemasangan etalase dan partisi toko</p>
                         </div>
                     </div>
                     
@@ -227,8 +227,8 @@
                     <div class="carousel-item">
                         <img src="images/portfolio/project3.jpg" class="d-block w-100" alt="Reklame Outdoor">
                         <div class="carousel-caption">
-                            <h5 class="fs-3">Reklame Outdoor</h5>
-                            <p>Pembuatan dan pemasangan baliho untuk usaha</p>
+                            <h5 class="fs-4 fs-md-3">Reklame Outdoor</h5>
+                            <p class="d-none d-sm-block">Pembuatan dan pemasangan baliho untuk usaha</p>
                         </div>
                     </div>
                     
@@ -236,8 +236,8 @@
                     <div class="carousel-item">
                         <img src="images/portfolio/project4.jpg" class="d-block w-100" alt="Proyek Teralis 2">
                         <div class="carousel-caption">
-                            <h5 class="fs-3">Teralis Kantor</h5>
-                            <p>Pemasangan teralis keamanan untuk gedung perkantoran</p>
+                            <h5 class="fs-4 fs-md-3">Teralis Kantor</h5>
+                            <p class="d-none d-sm-block">Pemasangan teralis keamanan untuk gedung perkantoran</p>
                         </div>
                     </div>
                 </div>
@@ -344,7 +344,7 @@
                 
                 <!-- Contact Form -->
                 <div class="col-lg-8">
-                    <div class="bg-white p-5 rounded-3 shadow-sm">
+                    <div class="bg-white p-4 p-md-5 rounded-3 shadow-sm">
                         <form id="contactForm">
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -371,10 +371,10 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="message" class="form-label">Pesan</label>
-                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-lg">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto">
                                         <i class="bi bi-send me-2"></i> Kirim Pesan
                                     </button>
                                 </div>
@@ -425,7 +425,7 @@
                 
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Jam Operasional</h5>
-                    <p class="text-light">
+                    <p class="text-light mb-2">
                         <i class="bi bi-clock me-2"></i> Senin - Jumat<br>
                         <span class="ms-4">08.00 - 17.00 WIB</span>
                     </p>

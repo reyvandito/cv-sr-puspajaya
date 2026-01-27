@@ -10,6 +10,14 @@ window.addEventListener('scroll', () => {
     } else {
         backToTop.classList.remove('active');
     }
+    
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('navbar-scrolled');
+    } else {
+        navbar.classList.remove('navbar-scrolled');
+    }
 });
 
 // Smooth scrolling for navigation links
@@ -22,8 +30,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
+            // Close navbar collapse on mobile after clicking a link
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse.classList.contains('show')) {
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                navbarToggler.click();
+            }
+            
+            // Calculate offset based on device
+            const offset = window.innerWidth < 768 ? 70 : 80;
+            
             window.scrollTo({
-                top: targetElement.offsetTop - 80,
+                top: targetElement.offsetTop - offset,
                 behavior: 'smooth'
             });
             
@@ -55,20 +73,25 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     this.reset();
 });
 
-// Navbar scroll effect
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('navbar-scrolled');
-    } else {
-        navbar.classList.remove('navbar-scrolled');
-    }
-});
-
 // Initialize tooltips (if any)
 document.addEventListener('DOMContentLoaded', function() {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+
+// Adjust padding on resize to prevent navbar overlap
+window.addEventListener('resize', function() {
+    // Recalculate scroll margin for sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.scrollMarginTop = window.innerWidth < 768 ? '70px' : '80px';
+    });
+});
+
+// Set initial scroll margin
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('section').forEach(section => {
+        section.style.scrollMarginTop = window.innerWidth < 768 ? '70px' : '80px';
     });
 });
