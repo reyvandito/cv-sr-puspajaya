@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV SR PUSPA JAYA - Jasa Teralis & Reklame Profesional</title>
-    <meta name="description" content="CV SR PUSPA JAYA menyediakan jasa pemasangan teralis, properti toko, dan pembuatan reklame berkualitas di Kepri. Hubungi kami untuk solusi terbaik!">
+    <title>CV SR PUSPA JAYA - Spesialis Teralis & Reklame Profesional</title>
+    <meta name="description" content="CV SR PUSPA JAYA - Jasa pemasangan teralis, properti toko, pembuatan reklame berkualitas di Kepri. Profesional, berpengalaman, harga kompetitif.">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/logo.png">
@@ -21,100 +21,232 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <!-- Logo Image -->
-                <img src="" alt="CV SR PUSPA JAYA" class="company-logo me-2">
-                CV <span class="ms-1">SR PUSPA JAYA</span>
-            </a>
-            
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Tentang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Layanan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Portofolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#clients">Klien</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Kontak</a>
-                    </li>
-                </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-3">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#home">
+            <!-- Logo Image (Mengganti tulisan SPJ) -->
+            <div class="logo-wrapper me-3">
+                <img src="images/logopuspajaya.jpg.png" alt="CV SR PUSPA JAYA" class="navbar-logo">
             </div>
+            <div>
+                <span class="company-name fw-bold">SR PUSPA JAYA</span>
+                <br>
+                <small class="company-tagline text-muted">Spesialis Teralis & Reklame</small>
+            </div>
+        </a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#home">
+                        <i class="bi bi-house-door me-2"></i>Beranda
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">
+                        <i class="bi bi-building me-2"></i>Tentang
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">
+                        <i class="bi bi-tools me-2"></i>Layanan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#portfolio">
+                        <i class="bi bi-images me-2"></i>Portofolio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#clients">
+                        <i class="bi bi-people me-2"></i>Klien
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">
+                        <i class="bi bi-telephone me-2"></i>Kontak
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                    <a href="https://wa.me/6281234567890" class="btn btn-primary btn-sm" target="_blank">
+                        <i class="bi bi-whatsapp me-2"></i>WhatsApp
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-                    <h1 class="display-5 display-md-4 fw-bold text-white mb-4">
-                        Solusi Teralis & Reklame <span class="text-warning">Profesional</span>
+    <section id="home" class="hero-section position-relative">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative z-1">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-8 col-md-10 mx-auto text-center">
+                    <div class="hero-badge mb-4">
+                        <span class="badge bg-primary-light text-dark">Sejak 2018</span>
+                    </div>
+                    
+                    <h1 class="hero-title display-4 fw-bold text-white mb-4">
+                        Solusi <span class="text-primary-light">Teralis</span> & 
+                        <span class="text-primary-light">Reklame</span> Profesional
                     </h1>
-                    <p class="lead text-white mb-4 px-3">
-                        CV SR PUSPA JAYA menyediakan jasa pemasangan teralis, properti toko, dan pembuatan reklame berkualitas tinggi dengan harga kompetitif. Melayani wilayah Kepri dan sekitarnya.
+                    
+                    <p class="hero-subtitle lead text-white mb-5 px-3">
+                        CV SR PUSPA JAYA memberikan layanan terbaik untuk kebutuhan teralis, properti toko, dan reklame Anda. 
+                        Profesional, berpengalaman, dan terpercaya di wilayah Kepulauan Riau.
                     </p>
-                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4">
-                        <a href="#contact" class="btn btn-primary btn-lg mb-2 mb-sm-0">
-                            <i class="bi bi-whatsapp me-2"></i> Hubungi Kami
+                    
+                    <div class="hero-cta d-flex flex-column flex-sm-row justify-content-center gap-3">
+                        <a href="#contact" class="btn btn-primary btn-lg px-5 py-3">
+                            <i class="bi bi-whatsapp me-2"></i>Konsultasi Gratis
                         </a>
-                        <a href="#services" class="btn btn-outline-light btn-lg">
-                            <i class="bi bi-eye me-2"></i> Lihat Layanan
+                        <a href="#services" class="btn btn-outline-light btn-lg px-5 py-3">
+                            <i class="bi bi-list-check me-2"></i>Lihat Layanan
                         </a>
+                    </div>
+                    
+                    <div class="hero-features row mt-5 pt-5">
+                        <div class="col-md-4">
+                            <div class="feature-item">
+                                <i class="bi bi-shield-check feature-icon"></i>
+                                <p class="text-white mb-0">Garansi Kualitas</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item">
+                                <i class="bi bi-clock-history feature-icon"></i>
+                                <p class="text-white mb-0">Tepat Waktu</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature-item">
+                                <i class="bi bi-currency-dollar feature-icon"></i>
+                                <p class="text-white mb-0">Harga Kompetitif</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <a href="#about" class="scroll-down">
+                <i class="bi bi-chevron-down"></i>
+            </a>
+        </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="section-title text-center">
-                <h2 class="display-5 fw-bold">Tentang Kami</h2>
+    <section id="about" class="py-6 about-section bg-light">
+        <div class="container py-6">
+            <div class="section-header text-center mb-6">
+                <span class="section-badge">PROFIL PERUSAHAAN</span>
+                <h2 class="section-title display-5 fw-bold mb-3">Tentang Kami</h2>
+                <p class="section-subtitle lead text-muted">Mengenal lebih dekat CV SR PUSPA JAYA</p>
             </div>
             
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <img src="images/about-company.jpg" alt="Tentang CV SR PUSPA JAYA" class="img-fluid about-img">
-                </div>
+            <div class="row align-items-center g-5">
+                <!-- Logo Section -->
                 <div class="col-lg-6">
-                    <h3 class="fw-bold mb-4">CV SR PUSPA JAYA</h3>
-                    <p class="mb-4">
-                        Kami adalah perusahaan yang berfokus pada jasa pemasangan teralis, properti toko, dan pembuatan reklame. Dengan pengalaman bertahun-tahun di bidang ini, kami telah membantu berbagai bisnis dan properti meningkatkan keamanan dan penampilan mereka.
-                    </p>
-                    <p class="mb-4">
-                        Komitmen kami adalah memberikan hasil kerja yang berkualitas, tepat waktu, dan sesuai dengan kebutuhan klien. Tim kami terdiri dari tenaga profesional yang berpengalaman dan menggunakan material terbaik untuk setiap proyek.
-                    </p>
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                        <div class="text-center mb-3 mb-sm-0 me-2">
-                            <h4 class="fw-bold text-danger">100+</h4>
-                            <p class="text-muted">Proyek Selesai</p>
+                    <div class="about-image-wrapper position-relative">
+                        <div class="about-image-frame"></div>
+                        <img src="images/logopuspanobg.jpg.png" alt="CV SR PUSPA JAYA" 
+                             class="img-fluid about-image rounded-4 shadow-lg">
+                        
+                        <!-- Image Badges -->
+                        <div class="about-badge experience-badge">
+                            <div class="badge-content">
+                                <span class="badge-number">5+</span>
+                                <span class="badge-text">Tahun Pengalaman</span>
+                            </div>
                         </div>
-                        <div class="text-center mb-3 mb-sm-0 me-2">
-                            <h4 class="fw-bold text-danger">5+</h4>
-                            <p class="text-muted">Tahun Pengalaman</p>
+                        
+                        <div class="about-badge project-badge">
+                            <div class="badge-content">
+                                <span class="badge-number">100+</span>
+                                <span class="badge-text">Proyek Terselesaikan</span>
+                            </div>
                         </div>
-                        <div class="text-center">
-                            <h4 class="fw-bold text-danger">50+</h4>
-                            <p class="text-muted">Klien Puas</p>
+                    </div>
+                </div>
+                
+                <!-- Content Section -->
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h3 class="about-title fw-bold mb-4">
+                            CV <span class="text-primary-dark">SR PUSPA JAYA</span>
+                        </h3>
+                        
+                        <p class="about-text mb-4">
+                            Sebagai perusahaan yang telah berpengalaman sejak 2018, CV SR PUSPA JAYA telah menjadi pilihan utama untuk jasa pemasangan teralis, properti toko, dan pembuatan reklame di Kepulauan Riau.
+                        </p>
+                        
+                        <p class="about-text mb-5">
+                            Dengan komitmen memberikan hasil terbaik, kami menggunakan material berkualitas tinggi dan tenaga profesional untuk setiap proyek. Kepuasan klien adalah prioritas utama kami.
+                        </p>
+                        
+                        <!-- Company Values -->
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <div class="value-card">
+                                    <div class="value-icon">
+                                        <i class="bi bi-award-fill"></i>
+                                    </div>
+                                    <h5 class="value-title">Kualitas Terjamin</h5>
+                                    <p class="value-text">Material premium & pengerjaan presisi</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="value-card">
+                                    <div class="value-icon">
+                                        <i class="bi bi-clock-fill"></i>
+                                    </div>
+                                    <h5 class="value-title">Tepat Waktu</h5>
+                                    <p class="value-text">Pengerjaan sesuai jadwal yang disepakati</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="value-card">
+                                    <div class="value-icon">
+                                        <i class="bi bi-shield-check"></i>
+                                    </div>
+                                    <h5 class="value-title">Bergaransi</h5>
+                                    <p class="value-text">Garansi hasil kerja dan material</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="value-card">
+                                    <div class="value-icon">
+                                        <i class="bi bi-headset"></i>
+                                    </div>
+                                    <h5 class="value-title">Support 24/7</h5>
+                                    <p class="value-text">Layanan purna jual yang responsif</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="stats-container">
+                            <div class="stat-item">
+                                <h3 class="stat-number" data-count="150">0</h3>
+                                <p class="stat-label">Proyek Selesai</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number" data-count="5">0</h3>
+                                <p class="stat-label">Tahun Pengalaman</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number" data-count="75">0</h3>
+                                <p class="stat-label">Klien Puas</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,180 +255,361 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-5">
-        <div class="container py-5">
-            <div class="section-title text-center">
-                <h2 class="display-5 fw-bold">Layanan Kami</h2>
-                <p class="lead text-muted">Kami menyediakan berbagai solusi untuk kebutuhan properti dan promosi bisnis Anda</p>
+    <section id="services" class="py-6 services-section">
+        <div class="container py-6">
+            <div class="section-header text-center mb-6">
+                <span class="section-badge">LAYANAN KAMI</span>
+                <h2 class="section-title display-5 fw-bold mb-3">Layanan Profesional</h2>
+                <p class="section-subtitle lead text-muted">Solusi lengkap untuk kebutuhan properti dan promosi bisnis Anda</p>
             </div>
             
             <div class="row g-4">
                 <!-- Service 1 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-grid-3x3-gap"></i>
+                        <div class="service-icon-wrapper">
+                            <i class="bi bi-grid-3x3-gap service-icon"></i>
                         </div>
-                        <h4 class="fw-bold mb-3">Pemasangan Teralis</h4>
-                        <p class="text-muted">
-                            Layanan pemasangan teralis untuk rumah, toko, kantor, dan gedung dengan berbagai model dan bahan berkualitas. Kami menggunakan material terbaik untuk keamanan maksimal.
+                        <div class="service-badge">Populer</div>
+                        <h4 class="service-title">Pemasangan Teralis</h4>
+                        <p class="service-description">
+                            Layanan pemasangan teralis untuk rumah, toko, kantor, dan gedung dengan berbagai model dan bahan berkualitas.
                         </p>
-                        <ul class="list-unstyled text-start">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Teralis Besi</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Teralis Stainless</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Model Custom</li>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Teralis Besi & Stainless</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Model Minimalis & Klasik</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Custom Design</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Anti Karat & Tahan Lama</li>
                         </ul>
+                        <a href="#contact" class="service-link">
+                            Konsultasi Sekarang <i class="bi bi-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
                 
                 <!-- Service 2 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-shop"></i>
+                        <div class="service-icon-wrapper">
+                            <i class="bi bi-shop service-icon"></i>
                         </div>
-                        <h4 class="fw-bold mb-3">Properti Toko</h4>
-                        <p class="text-muted">
-                            Pembuatan dan pemasangan properti toko seperti etalase, pintu toko, partisi, dan elemen komersial lainnya untuk mendukung bisnis Anda.
+                        <h4 class="service-title">Properti Toko</h4>
+                        <p class="service-description">
+                            Pembuatan dan pemasangan properti toko seperti etalase, pintu toko, partisi, dan elemen komersial lainnya.
                         </p>
-                        <ul class="list-unstyled text-start">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Etalase Toko</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Pintu Geser</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Partisi Ruangan</li>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Etalase Display</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Pintu Geser & Swing</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Rak & Partisi</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Interior Toko</li>
                         </ul>
+                        <a href="#contact" class="service-link">
+                            Konsultasi Sekarang <i class="bi bi-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
                 
                 <!-- Service 3 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-signpost"></i>
+                        <div class="service-icon-wrapper">
+                            <i class="bi bi-signpost service-icon"></i>
                         </div>
-                        <h4 class="fw-bold mb-3">Pembuatan Reklame</h4>
-                        <p class="text-muted">
-                            Jasa pembuatan reklame indoor dan outdoor, neon box, papan nama, baliho, dan signage lainnya untuk promosi bisnis Anda.
+                        <div class="service-badge">Best Seller</div>
+                        <h4 class="service-title">Pembuatan Reklame</h4>
+                        <p class="service-description">
+                            Jasa pembuatan reklame indoor/outdoor, neon box, papan nama, dan signage untuk promosi bisnis Anda.
                         </p>
-                        <ul class="list-unstyled text-start">
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Baliho Outdoor</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Neon Box</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Papan Nama</li>
+                        <ul class="service-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Baliho & Billboard</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Neon Box & Lightbox</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Papan Nama</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Signage Indoor</li>
                         </ul>
+                        <a href="#contact" class="service-link">
+                            Konsultasi Sekarang <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Services -->
+            <div class="row mt-5 pt-5">
+                <div class="col-12">
+                    <div class="additional-services bg-primary-light rounded-4 p-5">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8">
+                                <h3 class="text-white mb-3">Butuh Layanan Lainnya?</h3>
+                                <p class="text-white-50 mb-0">
+                                    Kami juga melayani jasa kanopi, pintu besi, pagar, dan pekerjaan logam lainnya. Konsultasikan kebutuhan Anda!
+                                </p>
+                            </div>
+                            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                                <a href="https://wa.me/6281234567890" class="btn btn-light btn-lg" target="_blank">
+                                    <i class="bi bi-whatsapp me-2"></i>WhatsApp Kami
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Slider -->
-    <section id="portfolio" class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="section-title text-center">
-                <h2 class="display-5 fw-bold">Portofolio Kami</h2>
-                <p class="lead text-muted">Beberapa proyek yang telah kami kerjakan</p>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-6 portfolio-section bg-light">
+        <div class="container py-6">
+            <div class="section-header text-center mb-6">
+                <span class="section-badge">HASIL KARYA</span>
+                <h2 class="section-title display-5 fw-bold mb-3">Portofolio Kami</h2>
+                <p class="section-subtitle lead text-muted">Beberapa proyek yang telah kami selesaikan dengan sukses</p>
             </div>
             
-            <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="2"></button>
-                    <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="3"></button>
-                </div>
-                
-                <div class="carousel-inner rounded-3 overflow-hidden">
-                    <!-- Slide 1 -->
-                    <div class="carousel-item active">
-                        <img src="images/portfolio/project1.jpg" class="d-block w-100" alt="Proyek Teralis 1">
-                        <div class="carousel-caption">
-                            <h5 class="fs-4 fs-md-3">Pemasangan Teralis Rumah</h5>
-                            <p class="d-none d-sm-block">Teralis besi dengan desain modern dan minimalis</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 2 -->
-                    <div class="carousel-item">
-                        <img src="images/portfolio/project2.jpg" class="d-block w-100" alt="Proyek Toko">
-                        <div class="carousel-caption">
-                            <h5 class="fs-4 fs-md-3">Properti Toko Alfamart</h5>
-                            <p class="d-none d-sm-block">Pemasangan etalase dan partisi toko</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 3 -->
-                    <div class="carousel-item">
-                        <img src="images/portfolio/project3.jpg" class="d-block w-100" alt="Reklame Outdoor">
-                        <div class="carousel-caption">
-                            <h5 class="fs-4 fs-md-3">Reklame Outdoor</h5>
-                            <p class="d-none d-sm-block">Pembuatan dan pemasangan baliho untuk usaha</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 4 -->
-                    <div class="carousel-item">
-                        <img src="images/portfolio/project4.jpg" class="d-block w-100" alt="Proyek Teralis 2">
-                        <div class="carousel-caption">
-                            <h5 class="fs-4 fs-md-3">Teralis Kantor</h5>
-                            <p class="d-none d-sm-block">Pemasangan teralis keamanan untuk gedung perkantoran</p>
+            
+            <!-- Portfolio Grid -->
+            <div class="row g-4 portfolio-grid">
+                <!-- Portfolio Item 1 -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="teralis">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/teralis1.jpg" alt="Teralis Rumah Minimalis" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <span class="portfolio-category">Teralis</span>
+                                    <h4 class="portfolio-title">Teralis Rumah Minimalis</h4>
+                                    <a href="images/portfolio/teralis1.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <!-- Portfolio Item 2 -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="toko">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/toko1.jpg" alt="Etalase Alfamart" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <span class="portfolio-category">Properti Toko</span>
+                                    <h4 class="portfolio-title">Etalase Alfamart</h4>
+                                    <a href="images/portfolio/toko1.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="reklame">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/reklame1.jpg" alt="Baliho Outdoor" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <span class="portfolio-category">Reklame</span>
+                                    <h4 class="portfolio-title">Baliho Outdoor Usaha</h4>
+                                    <a href="images/portfolio/reklame1.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="teralis">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/teralis2.jpg" alt="Teralis Kantor" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <span class="portfolio-category">Teralis</span>
+                                    <h4 class="portfolio-title">Teralis Kantor Modern</h4>
+                                    <a href="images/portfolio/teralis2.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="toko">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/toko2.jpg" alt="Pintu Toko" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <span class="portfolio-category">Properti Toko</span>
+                                    <h4 class="portfolio-title">Pintu Geser Stainless</h4>
+                                    <a href="images/portfolio/toko2.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="col-lg-4 col-md-6 portfolio-item" data-category="reklame">
+                    <div class="portfolio-card">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/reklame2.jpg" alt="Neon Box" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <span class="portfolio-category">Reklame</span>
+                                    <h4 class="portfolio-title">Neon Box Cafe</h4>
+                                    <a href="images/portfolio/reklame2.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                                        <i class="bi bi-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View More Button -->
+            <div class="text-center mt-5">
+                <a href="#contact" class="btn btn-primary btn-lg px-5">
+                    <i class="bi bi-images me-2"></i>Lihat Lebih Banyak
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Clients Section -->
-    <section id="clients" class="py-5">
-        <div class="container py-5">
-            <div class="section-title text-center">
-                <h2 class="display-5 fw-bold">Klien & Mitra Kami</h2>
-                <p class="lead text-muted">Beberapa perusahaan yang telah mempercayai layanan kami</p>
+    <section id="clients" class="py-6 clients-section">
+        <div class="container py-6">
+            <div class="section-header text-center mb-6">
+                <span class="section-badge">KEPERCAYAAN</span>
+                <h2 class="section-title display-5 fw-bold mb-3">Klien & Mitra Kami</h2>
+                <p class="section-subtitle lead text-muted">Perusahaan yang telah mempercayai layanan kami</p>
             </div>
             
-            <div class="row g-4">
-                <!-- Client 1 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="client-logo text-center">
-                        <img src="images/logo_alfamart.jpg" alt="Alfamart" class="img-fluid mb-2">
-                        <p class="text-muted mb-0">PT. Alfaria Trijaya</p>
-                    </div>
-                </div>
-                
-                <!-- Client 2 -->
-                <div class="col-lg-3 col-md-6">
+            <div class="clients-slider">
+                <div class="client-slide">
                     <div class="client-logo">
-                        <div class="text-center">
-                            <h4 class="fw-bold client-name">Client 2</h4>
-                            <p class="text-muted mb-0">Mitra Kerjasama</p>
+                        <div class="client-logo-inner">
+                            <img src="images/logo_alfamart.jpg" alt="Alfamart" class="img-fluid">
                         </div>
+                        <p class="client-name mt-3 mb-0">Alfamart</p>
                     </div>
                 </div>
                 
-                <!-- Client 3 -->
-                <div class="col-lg-3 col-md-6">
+                <div class="client-slide">
                     <div class="client-logo">
-                        <div class="text-center">
-                            <h4 class="fw-bold client-name">Client 3</h4>
-                            <p class="text-muted mb-0">Mitra Kerjasama</p>
+                        <div class="client-logo-inner">
+                            <img src="images/clients/indomaret.png" alt="Indomaret" class="img-fluid">
                         </div>
+                        <p class="client-name mt-3 mb-0">Indomaret</p>
                     </div>
                 </div>
                 
-                <!-- Client 4 -->
-                <div class="col-lg-3 col-md-6">
+                <div class="client-slide">
                     <div class="client-logo">
-                        <div class="text-center">
-                            <h4 class="fw-bold client-name">Client 4</h4>
-                            <p class="text-muted mb-0">Mitra Kerjasama</p>
+                        <div class="client-logo-inner">
+                            <img src="images/logo_alfamart.jpg" alt="Alfamidi" class="img-fluid">
+                        </div>
+                        <p class="client-name mt-3 mb-0">Alfamidi</p>
+                    </div>
+                </div>
+                
+                <div class="client-slide">
+                    <div class="client-logo">
+                        <div class="client-logo-inner">
+                            <div class="client-placeholder">
+                                <i class="bi bi-building"></i>
+                            </div>
+                        </div>
+                        <p class="client-name mt-3 mb-0">Perusahaan Swasta</p>
+                    </div>
+                </div>
+                
+                <div class="client-slide">
+                    <div class="client-logo">
+                        <div class="client-logo-inner">
+                            <div class="client-placeholder">
+                                <i class="bi bi-shop"></i>
+                            </div>
+                        </div>
+                        <p class="client-name mt-3 mb-0">UMKM Lokal</p>
+                    </div>
+                </div>
+                
+                <div class="client-slide">
+                    <div class="client-logo">
+                        <div class="client-logo-inner">
+                            <div class="client-placeholder">
+                                <i class="bi bi-house-door"></i>
+                            </div>
+                        </div>
+                        <p class="client-name mt-3 mb-0">Perumahan</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="row mt-6 pt-6">
+                <div class="col-12">
+                    <div class="testimonials-wrapper">
+                        <h3 class="text-center mb-5">Apa Kata Klien Kami</h3>
+                        <div class="row g-4">
+                            <div class="col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <p class="testimonial-text">
+                                            "Hasil teralis yang dibuat sangat rapi dan kuat. Tim pengerjaan profesional dan tepat waktu. Recommended!"
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-info">
+                                            <h5 class="author-name">Bapak Andi</h5>
+                                            <p class="author-role">Pemilik Rumah</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <p class="testimonial-text">
+                                            "Pengerjaan etalase toko kami sangat memuaskan. Material berkualitas dan harga bersaing."
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-info">
+                                            <h5 class="author-name">Ibu Sari</h5>
+                                            <p class="author-role">Pemilik Toko</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <p class="testimonial-text">
+                                            "Reklame yang dibuat menarik perhatian dan tahan lama. Pelayanan sangat memuaskan."
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-info">
+                                            <h5 class="author-name">Bapak Rudi</h5>
+                                            <p class="author-role">Pemilik Usaha</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -305,134 +618,219 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="section-title text-center">
-                <h2 class="display-5 fw-bold">Hubungi Kami</h2>
-                <p class="lead text-muted">Silakan hubungi kami untuk konsultasi dan penawaran</p>
+    <section id="contact" class="py-6 contact-section bg-light">
+        <div class="container py-6">
+            <div class="section-header text-center mb-6">
+                <span class="section-badge">HUBUNGI KAMI</span>
+                <h2 class="section-title display-5 fw-bold mb-3">Konsultasi Gratis</h2>
+                <p class="section-subtitle lead text-muted">Diskusikan kebutuhan Anda dengan tim profesional kami</p>
             </div>
             
             <div class="row g-5">
                 <!-- Contact Info -->
                 <div class="col-lg-4">
-                    <div class="contact-info-box">
-                        <div class="contact-icon">
-                            <i class="bi bi-geo-alt"></i>
+                    <div class="contact-info-wrapper">
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h4 class="contact-info-title">Alamat Kantor</h4>
+                                <p class="contact-info-text">
+                                    Jl. Contoh No. 123, Kel. Bahagia<br>
+                                    Kec. Mulya, Kota Kepri, 29123
+                                </p>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-3">Alamat Kami</h4>
-                        <p class="text-muted mb-4">
-                            Jl. Contoh No. 123, Kota, Kepulauan Riau, Indonesia
-                        </p>
                         
-                        <div class="contact-icon">
-                            <i class="bi bi-telephone"></i>
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h4 class="contact-info-title">Telepon & WhatsApp</h4>
+                                <p class="contact-info-text">
+                                    +62 812-3456-7890<br>
+                                    +62 813-4567-8901
+                                </p>
+                                <a href="https://wa.me/6281234567890" class="btn btn-success btn-sm mt-2" target="_blank">
+                                    <i class="bi bi-whatsapp me-1"></i>Chat WhatsApp
+                                </a>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-3">Telepon / WhatsApp</h4>
-                        <p class="text-muted mb-4">
-                            +62 812-3456-7890
-                        </p>
                         
-                        <div class="contact-icon">
-                            <i class="bi bi-envelope"></i>
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h4 class="contact-info-title">Email</h4>
+                                <p class="contact-info-text">
+                                    info@srpuspajaya.com<br>
+                                    marketing@srpuspajaya.com
+                                </p>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-3">Email</h4>
-                        <p class="text-muted">
-                            info@srpuspajaya.com
-                        </p>
+                        
+                        <div class="contact-info-card">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h4 class="contact-info-title">Jam Operasional</h4>
+                                <p class="contact-info-text">
+                                    Senin - Jumat: 08.00 - 17.00 WIB<br>
+                                    Sabtu: 08.00 - 14.00 WIB
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Contact Form -->
                 <div class="col-lg-8">
-                    <div class="bg-white p-4 p-md-5 rounded-3 shadow-sm">
-                        <form id="contactForm">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="name" class="form-label">Nama Lengkap</label>
-                                    <input type="text" class="form-control" id="name" required>
+                    <div class="contact-form-wrapper">
+                        <div class="contact-form-card">
+                            <h3 class="form-title mb-4">Kirim Pesan</h3>
+                            <form id="contactForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name" class="form-label">Nama Lengkap *</label>
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone" class="form-label">Nomor Telepon *</label>
+                                            <input type="tel" class="form-control" id="phone" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="email" class="form-label">Email *</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="subject" class="form-label">Jenis Layanan *</label>
+                                            <select class="form-select" id="subject" required>
+                                                <option value="">Pilih layanan yang dibutuhkan</option>
+                                                <option value="teralis">Pemasangan Teralis</option>
+                                                <option value="toko">Properti Toko</option>
+                                                <option value="reklame">Pembuatan Reklame</option>
+                                                <option value="lainnya">Lainnya</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="message" class="form-label">Pesan *</label>
+                                            <textarea class="form-control" id="message" rows="5" 
+                                                      placeholder="Jelaskan detail kebutuhan Anda..." required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100 py-3">
+                                            <i class="bi bi-send me-2"></i>Kirim Pesan
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="form-label">Nomor Telepon</label>
-                                    <input type="tel" class="form-control" id="phone" required>
-                                </div>
-                                <div class="col-12">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                </div>
-                                <div class="col-12">
-                                    <label for="subject" class="form-label">Subjek</label>
-                                    <select class="form-select" id="subject" required>
-                                        <option selected disabled>Pilih layanan yang dibutuhkan</option>
-                                        <option value="teralis">Pemasangan Teralis</option>
-                                        <option value="properti">Properti Toko</option>
-                                        <option value="reklame">Pembuatan Reklame</option>
-                                        <option value="lainnya">Lainnya</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label for="message" class="form-label">Pesan</label>
-                                    <textarea class="form-control" id="message" rows="4" required></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-lg w-100 w-md-auto">
-                                        <i class="bi bi-send me-2"></i> Kirim Pesan
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CTA Section -->
+    <section class="py-6 cta-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 class="cta-title text-white mb-3">Siap Memulai Proyek Anda?</h2>
+                    <p class="cta-text text-white mb-0">
+                        Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                    <a href="https://wa.me/6281234567890" class="btn btn-light btn-lg px-5" target="_blank">
+                        <i class="bi bi-whatsapp me-2"></i>Hubungi via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="py-5">
+    <footer class="footer py-6">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-4">
-                    <div class="footer-logo">CV <span>SR PUSPA JAYA</span></div>
-                    <p class="text-light mb-4">
+                    <div class="footer-logo mb-4">
+                        <div class="logo-circle me-3">
+                            <span class="logo-text">SPJ</span>
+                        </div>
+                        <div>
+                            <h3 class="company-name fw-bold text-white mb-1">SR PUSPA JAYA</h3>
+                            <p class="company-tagline text-white-50">Spesialis Teralis & Reklame</p>
+                        </div>
+                    </div>
+                    <p class="text-white-50 mb-4">
                         Perusahaan spesialis jasa pemasangan teralis, properti toko, dan pembuatan reklame berkualitas di Kepulauan Riau.
                     </p>
-                    <div class="social-icons">
-                        <a href="#" class="me-2"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="me-2"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="me-2"><i class="bi bi-whatsapp"></i></a>
-                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
                     </div>
                 </div>
                 
                 <div class="col-lg-2 col-md-6">
-                    <h5 class="text-white mb-4">Tautan Cepat</h5>
-                    <div class="footer-links">
-                        <a href="#home">Beranda</a>
-                        <a href="#about">Tentang Kami</a>
-                        <a href="#services">Layanan</a>
-                        <a href="#portfolio">Portofolio</a>
-                        <a href="#contact">Kontak</a>
-                    </div>
+                    <h4 class="footer-title">Tautan Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="bi bi-chevron-right"></i> Beranda</a></li>
+                        <li><a href="#about"><i class="bi bi-chevron-right"></i> Tentang Kami</a></li>
+                        <li><a href="#services"><i class="bi bi-chevron-right"></i> Layanan</a></li>
+                        <li><a href="#portfolio"><i class="bi bi-chevron-right"></i> Portofolio</a></li>
+                        <li><a href="#contact"><i class="bi bi-chevron-right"></i> Kontak</a></li>
+                    </ul>
                 </div>
                 
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Layanan Kami</h5>
-                    <div class="footer-links">
-                        <a href="#services">Pemasangan Teralis</a>
-                        <a href="#services">Properti Toko</a>
-                        <a href="#services">Pembuatan Reklame</a>
-                    </div>
+                    <h4 class="footer-title">Layanan Kami</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services"><i class="bi bi-chevron-right"></i> Pemasangan Teralis</a></li>
+                        <li><a href="#services"><i class="bi bi-chevron-right"></i> Properti Toko</a></li>
+                        <li><a href="#services"><i class="bi bi-chevron-right"></i> Pembuatan Reklame</a></li>
+                        <li><a href="#services"><i class="bi bi-chevron-right"></i> Kanopi & Pagar</a></li>
+                        <li><a href="#services"><i class="bi bi-chevron-right"></i> Pintu Besi</a></li>
+                    </ul>
                 </div>
                 
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Jam Operasional</h5>
-                    <p class="text-light mb-2">
-                        <i class="bi bi-clock me-2"></i> Senin - Jumat<br>
-                        <span class="ms-4">08.00 - 17.00 WIB</span>
-                    </p>
-                    <p class="text-light">
-                        <i class="bi bi-clock me-2"></i> Sabtu<br>
-                        <span class="ms-4">08.00 - 14.00 WIB</span>
-                    </p>
+                    <h4 class="footer-title">Kontak Kami</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="bi bi-geo-alt"></i>
+                            <span>Jl. Contoh No. 123, Kota Kepri</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone"></i>
+                            <span>+62 812-3456-7890</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope"></i>
+                            <span>info@srpuspajaya.com</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock"></i>
+                            <span>Senin - Sabtu: 08.00 - 17.00</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             
@@ -440,28 +838,24 @@
             
             <div class="row">
                 <div class="col-md-6">
-                    <p class="text-light mb-0">
-                        &copy; <span id="currentYear"></span> CV SR PUSPA JAYA. Semua Hak Dilindungi.
+                    <p class="text-white-50 mb-0">
+                        &copy; <span id="currentYear"></span> CV SR PUSPA JAYA. All rights reserved.
                     </p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="text-light mb-0">
-                        Designed with <i class="bi bi-heart-fill text-danger"></i> for your business
-                    </p>
-                </div>
+               
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <a href="#" class="back-to-top" id="backToTop">
+    <!-- Back to Top -->
+    <a href="#home" class="back-to-top">
         <i class="bi bi-arrow-up"></i>
     </a>
 
-    <!-- Bootstrap JS Bundle with Popper -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Custom JavaScript -->
+    <!-- Custom JS -->
     <script src="js/script.js"></script>
 </body>
 </html>
