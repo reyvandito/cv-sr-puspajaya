@@ -23,65 +23,65 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
     <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-3">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#home">
-            <!-- Logo Image (Mengganti tulisan SPJ) -->
-            <div class="logo-wrapper me-3">
-                <img src="images/logopuspajaya.jpg.png" alt="CV SR PUSPA JAYA" class="navbar-logo">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <!-- Logo Image -->
+                <div class="logo-wrapper me-3">
+                    <img src="images/logopuspajaya.jpg.png" alt="CV SR PUSPA JAYA" class="navbar-logo">
+                </div>
+                <div>
+                    <span class="company-name fw-bold">SR PUSPA JAYA</span>
+                    <br>
+                    <small class="company-tagline text-muted">Spesialis Teralis & Reklame</small>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">
+                            <i class="bi bi-house-door me-2"></i>Beranda
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">
+                            <i class="bi bi-building me-2"></i>Tentang
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">
+                            <i class="bi bi-tools me-2"></i>Layanan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">
+                            <i class="bi bi-images me-2"></i>Portofolio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#clients">
+                            <i class="bi bi-people me-2"></i>Klien
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">
+                            <i class="bi bi-telephone me-2"></i>Kontak
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="https://wa.me/6281234567890" class="btn btn-primary btn-sm" target="_blank">
+                            <i class="bi bi-whatsapp me-2"></i>WhatsApp
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div>
-                <span class="company-name fw-bold">SR PUSPA JAYA</span>
-                <br>
-                <small class="company-tagline text-muted">Spesialis Teralis & Reklame</small>
-            </div>
-        </a>
-        
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#home">
-                        <i class="bi bi-house-door me-2"></i>Beranda
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">
-                        <i class="bi bi-building me-2"></i>Tentang
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#services">
-                        <i class="bi bi-tools me-2"></i>Layanan
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#portfolio">
-                        <i class="bi bi-images me-2"></i>Portofolio
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#clients">
-                        <i class="bi bi-people me-2"></i>Klien
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">
-                        <i class="bi bi-telephone me-2"></i>Kontak
-                    </a>
-                </li>
-                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                    <a href="https://wa.me/6281234567890" class="btn btn-primary btn-sm" target="_blank">
-                        <i class="bi bi-whatsapp me-2"></i>WhatsApp
-                    </a>
-                </li>
-            </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section position-relative">
@@ -145,7 +145,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-6 about-section bg-light">
+    <section id="about" class="py-6 about-section">
         <div class="container py-6">
             <div class="section-header text-center mb-6">
                 <span class="section-badge">PROFIL PERUSAHAAN</span>
@@ -153,101 +153,128 @@
                 <p class="section-subtitle lead text-muted">Mengenal lebih dekat CV SR PUSPA JAYA</p>
             </div>
             
-            <div class="row align-items-center g-5">
-                <!-- Logo Section -->
-                <div class="col-lg-6">
-                    <div class="about-image-wrapper position-relative">
-                        <div class="about-image-frame"></div>
-                        <img src="images/logopuspanobg.jpg.png" alt="CV SR PUSPA JAYA" 
-                             class="img-fluid about-image rounded-4 shadow-lg">
-                        
-                        <!-- Image Badges -->
-                        <div class="about-badge experience-badge">
-                            <div class="badge-content">
-                                <span class="badge-number">5+</span>
-                                <span class="badge-text">Tahun Pengalaman</span>
+            <!-- Company Header -->
+            <div class="company-header">
+                <div class="clean-logo-no-bg">
+                     <div class="clean-company-logo">
+        <img src="images/logopuspanobg.jpg.png" alt="CV SR PUSPA JAYA">
+                </div>
+                </div>
+                <h3>
+                    CV <span class="text-primary-dark">SR PUSPA JAYA</span>
+                </h3>
+                <p class="company-tagline">
+                    Spesialis Teralis & Reklame Profesional sejak 2018
+                </p>
+            </div>
+            
+            <!-- Company Profile -->
+            <div class="about-content">
+                <div class="about-row description-cards">
+                    <h4>Profil & Komitmen Kami</h4>
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="description-card">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-building"></i>
+                                </div>
+                                <h5>Profil Perusahaan</h5>
+                                <p>
+                                    Sebagai perusahaan yang telah berpengalaman sejak 2018, CV SR PUSPA JAYA telah menjadi pilihan utama untuk jasa pemasangan teralis, properti toko, dan pembuatan reklame di Kepulauan Riau.
+                                </p>
                             </div>
                         </div>
-                        
-                        <div class="about-badge project-badge">
-                            <div class="badge-content">
-                                <span class="badge-number">100+</span>
-                                <span class="badge-text">Proyek Terselesaikan</span>
+                        <div class="col-lg-6">
+                            <div class="description-card">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-award"></i>
+                                </div>
+                                <h5>Komitmen Kami</h5>
+                                <p>
+                                    Dengan komitmen memberikan hasil terbaik, kami menggunakan material berkualitas tinggi dan tenaga profesional untuk setiap proyek. Kepuasan klien adalah prioritas utama kami.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Content Section -->
-                <div class="col-lg-6">
-                    <div class="about-content">
-                        <h3 class="about-title fw-bold mb-4">
-                            CV <span class="text-primary-dark">SR PUSPA JAYA</span>
-                        </h3>
-                        
-                        <p class="about-text mb-4">
-                            Sebagai perusahaan yang telah berpengalaman sejak 2018, CV SR PUSPA JAYA telah menjadi pilihan utama untuk jasa pemasangan teralis, properti toko, dan pembuatan reklame di Kepulauan Riau.
-                        </p>
-                        
-                        <p class="about-text mb-5">
-                            Dengan komitmen memberikan hasil terbaik, kami menggunakan material berkualitas tinggi dan tenaga profesional untuk setiap proyek. Kepuasan klien adalah prioritas utama kami.
-                        </p>
-                        
-                        <!-- Company Values -->
-                        <div class="row g-4 mb-5">
-                            <div class="col-md-6">
-                                <div class="value-card">
-                                    <div class="value-icon">
-                                        <i class="bi bi-award-fill"></i>
-                                    </div>
-                                    <h5 class="value-title">Kualitas Terjamin</h5>
-                                    <p class="value-text">Material premium & pengerjaan presisi</p>
-                                </div>
+                <!-- Stats Section -->
+                <div class="about-row stats-row">
+                    <h4>Pencapaian Kami</h4>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-icon">
+                                <i class="bi bi-check-circle"></i>
                             </div>
-                            <div class="col-md-6">
-                                <div class="value-card">
-                                    <div class="value-icon">
-                                        <i class="bi bi-clock-fill"></i>
-                                    </div>
-                                    <h5 class="value-title">Tepat Waktu</h5>
-                                    <p class="value-text">Pengerjaan sesuai jadwal yang disepakati</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="value-card">
-                                    <div class="value-icon">
-                                        <i class="bi bi-shield-check"></i>
-                                    </div>
-                                    <h5 class="value-title">Bergaransi</h5>
-                                    <p class="value-text">Garansi hasil kerja dan material</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="value-card">
-                                    <div class="value-icon">
-                                        <i class="bi bi-headset"></i>
-                                    </div>
-                                    <h5 class="value-title">Support 24/7</h5>
-                                    <p class="value-text">Layanan purna jual yang responsif</p>
-                                </div>
-                            </div>
+                            <div class="stat-number" data-count="150">0</div>
+                            <div class="stat-label">Proyek Selesai</div>
+                            <p class="stat-desc">Seluruh Kepulauan Riau</p>
                         </div>
-                        
-                        <!-- Stats -->
-                        <div class="stats-container">
-                            <div class="stat-item">
-                                <h3 class="stat-number" data-count="150">0</h3>
-                                <p class="stat-label">Proyek Selesai</p>
+                        <div class="stat-box">
+                            <div class="stat-icon">
+                                <i class="bi bi-calendar-check"></i>
                             </div>
-                            <div class="stat-item">
-                                <h3 class="stat-number" data-count="5">0</h3>
-                                <p class="stat-label">Tahun Pengalaman</p>
-                            </div>
-                            <div class="stat-item">
-                                <h3 class="stat-number" data-count="75">0</h3>
-                                <p class="stat-label">Klien Puas</p>
-                            </div>
+                            <div class="stat-number" data-count="5">0</div>
+                            <div class="stat-label">Tahun Pengalaman</div>
+                            <p class="stat-desc">Sejak 2018</p>
                         </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="stat-number" data-count="75">0</div>
+                            <div class="stat-label">Klien Puas</div>
+                            <p class="stat-desc">Rata-rata rating 4.9/5</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Values Section -->
+                <div class="about-row values-row">
+                    <h4>Nilai-nilai Perusahaan</h4>
+                    <div class="values-grid">
+                        <div class="value-box">
+                            <div class="value-icon">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+                            <h6>Kualitas Terjamin</h6>
+                            <p>Material premium & pengerjaan presisi</p>
+                        </div>
+                        <div class="value-box">
+                            <div class="value-icon">
+                                <i class="bi bi-clock-fill"></i>
+                            </div>
+                            <h6>Tepat Waktu</h6>
+                            <p>Pengerjaan sesuai jadwal yang disepakati</p>
+                        </div>
+                        <div class="value-box">
+                            <div class="value-icon">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <h6>Bergaransi</h6>
+                            <p>Garansi hasil kerja dan material</p>
+                        </div>
+                        <div class="value-box">
+                            <div class="value-icon">
+                                <i class="bi bi-headset"></i>
+                            </div>
+                            <h6>Support 24/7</h6>
+                            <p>Layanan purna jual yang responsif</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CTA Section -->
+                <div class="about-cta">
+                    <div class="about-cta-content">
+                        <h3>Siap Bekerja Sama Dengan Kami?</h3>
+                        <p>
+                            Konsultasikan kebutuhan teralis, properti toko, atau reklame Anda dengan tim profesional kami. 
+                            Dapatkan penawaran terbaik dan solusi yang tepat untuk bisnis Anda.
+                        </p>
+                        <a href="#contact" class="btn btn-lg">
+                            <i class="bi bi-whatsapp me-2"></i>Konsultasi Gratis Sekarang
+                        </a>
                     </div>
                 </div>
             </div>
@@ -356,135 +383,27 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-6 portfolio-section bg-light">
-        <div class="container py-6">
-            <div class="section-header text-center mb-6">
-                <span class="section-badge">HASIL KARYA</span>
-                <h2 class="section-title display-5 fw-bold mb-3">Portofolio Kami</h2>
-                <p class="section-subtitle lead text-muted">Beberapa proyek yang telah kami selesaikan dengan sukses</p>
-            </div>
-            
-            
-            <!-- Portfolio Grid -->
-            <div class="row g-4 portfolio-grid">
-                <!-- Portfolio Item 1 -->
-                <div class="col-lg-4 col-md-6 portfolio-item" data-category="teralis">
-                    <div class="portfolio-card">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/teralis1.jpg" alt="Teralis Rumah Minimalis" class="img-fluid">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <span class="portfolio-category">Teralis</span>
-                                    <h4 class="portfolio-title">Teralis Rumah Minimalis</h4>
-                                    <a href="images/portfolio/teralis1.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 2 -->
-                <div class="col-lg-4 col-md-6 portfolio-item" data-category="toko">
-                    <div class="portfolio-card">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/toko1.jpg" alt="Etalase Alfamart" class="img-fluid">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <span class="portfolio-category">Properti Toko</span>
-                                    <h4 class="portfolio-title">Etalase Alfamart</h4>
-                                    <a href="images/portfolio/toko1.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 3 -->
-                <div class="col-lg-4 col-md-6 portfolio-item" data-category="reklame">
-                    <div class="portfolio-card">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/reklame1.jpg" alt="Baliho Outdoor" class="img-fluid">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <span class="portfolio-category">Reklame</span>
-                                    <h4 class="portfolio-title">Baliho Outdoor Usaha</h4>
-                                    <a href="images/portfolio/reklame1.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 4 -->
-                <div class="col-lg-4 col-md-6 portfolio-item" data-category="teralis">
-                    <div class="portfolio-card">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/teralis2.jpg" alt="Teralis Kantor" class="img-fluid">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <span class="portfolio-category">Teralis</span>
-                                    <h4 class="portfolio-title">Teralis Kantor Modern</h4>
-                                    <a href="images/portfolio/teralis2.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 5 -->
-                <div class="col-lg-4 col-md-6 portfolio-item" data-category="toko">
-                    <div class="portfolio-card">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/toko2.jpg" alt="Pintu Toko" class="img-fluid">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <span class="portfolio-category">Properti Toko</span>
-                                    <h4 class="portfolio-title">Pintu Geser Stainless</h4>
-                                    <a href="images/portfolio/toko2.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 6 -->
-                <div class="col-lg-4 col-md-6 portfolio-item" data-category="reklame">
-                    <div class="portfolio-card">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/reklame2.jpg" alt="Neon Box" class="img-fluid">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <span class="portfolio-category">Reklame</span>
-                                    <h4 class="portfolio-title">Neon Box Cafe</h4>
-                                    <a href="images/portfolio/reklame2.jpg" class="portfolio-view" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- View More Button -->
-            <div class="text-center mt-5">
-                <a href="#contact" class="btn btn-primary btn-lg px-5">
-                    <i class="bi bi-images me-2"></i>Lihat Lebih Banyak
-                </a>
-            </div>
+ <!-- Gallery Section -->
+<section id="gallery" class="py-6 gallery-section bg-light">
+    <div class="container py-6">
+        <div class="section-header text-center mb-6">
+            <span class="section-badge">GALERI</span>
+            <h2 class="section-title display-5 fw-bold mb-3">Hasil Pekerjaan</h2>
+            <p class="section-subtitle lead text-muted">Foto-foto hasil pekerjaan kami</p>
         </div>
-    </section>
+
+        <!-- Gallery Grid - SIMPLE IMAGES ONLY -->
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/gallery/1.jpg" alt="Pekerjaan 1" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery/2.jpg" alt="Pekerjaan 2" loading="lazy">
+            </div>
+            <!-- tambahkan gambar lainnya -->
+        </div>
+    </div>
+</section>
 
     <!-- Clients Section -->
     <section id="clients" class="py-6 clients-section">
@@ -842,7 +761,11 @@
                         &copy; <span id="currentYear"></span> CV SR PUSPA JAYA. All rights reserved.
                     </p>
                 </div>
-               
+                <div class="col-md-6 text-md-end">
+                    <p class="text-white-50 mb-0">
+                        Designed with <i class="bi bi-heart-fill text-danger"></i> for your business success
+                    </p>
+                </div>
             </div>
         </div>
     </footer>
