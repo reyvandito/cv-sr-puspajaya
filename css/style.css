@@ -264,61 +264,9 @@ img {
     flex-direction: row;
 }
 
-/* ===== RESPONSIVE MOBILE ===== */
-@media (max-width: 991px) {
-    .navbar > .container {
-        flex-wrap: wrap;
-    }
-    
-    .navbar-brand {
-        order: 1;
-    }
-    
-    .navbar-toggler {
-        order: 2;
-        margin-left: auto;
-    }
-    
-    .navbar-collapse {
-        order: 3;
-        width: 100%;
-        margin-top: 1rem;
-    }
-    
-    .navbar-nav {
-        flex-direction: column;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        width: 100%;
-    }
-    
-    .nav-item {
-        width: 100%;
-        margin: 0 0 0.5rem 0 !important;
-    }
-    
-    .nav-link {
-        width: 100%;
-        padding: 0.75rem 0 !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-    }
-    
-    .navbar .btn-success {
-        margin-left: 0;
-        margin-top: 0.5rem;
-        width: 100%;
-        text-align: center;
-        padding: 0.5rem 1rem !important;
-    }
-    
-    .nav-link::after {
-        display: none;
-    }
-}
+/* ===== NAVBAR RESPONSIVE FIX ===== */
 
-/* ===== DESKTOP LAYOUT ===== */
+/* Desktop - logo kiri, menu kanan */
 @media (min-width: 992px) {
     .navbar-collapse {
         flex-grow: 0 !important;
@@ -334,6 +282,37 @@ img {
     /* Pastikan item terakhir (WhatsApp) benar-benar di ujung kanan */
     .nav-item:last-child {
         margin-right: 0 !important;
+    }
+}
+
+/* Mobile - collapse harus bekerja */
+@media (max-width: 991px) {
+    /* Biarkan Bootstrap handle collapse */
+    .navbar-collapse {
+        /* Hapus semua custom style untuk collapse di mobile */
+        margin-top: 1rem;
+    }
+    
+    /* Reset beberapa style yang mengganggu Bootstrap */
+    .navbar-nav {
+        text-align: left;
+    }
+    
+    .nav-item {
+        margin-bottom: 0.5rem;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 0 !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Tombol WhatsApp di mobile */
+    .navbar .btn-success {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+        text-align: center;
     }
 }
 
