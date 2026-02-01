@@ -1,228 +1,348 @@
 // ============================================
+// WEBSITE CV SR PUSPA JAYA - SCRIPT.JS
+// ============================================
+// Versi: 2.0 - Responsif & Dioptimalkan
+// ============================================
+
+'use strict';
+
+// ============================================
+// GLOBAL VARIABLES
+// ============================================
+let currentImageIndex = 0;
+let galleryImages = [];
+let statsAnimated = false;
+let navbarCollapsed = false;
+
+// ============================================
 // DOM READY & INITIALIZATION
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Website CV SR PUSPA JAYA - Initializing...');
+    console.log('🚀 Website CV SR PUSPA JAYA - Initializing...');
     
-    // Initialize current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
-    // Initialize simple lightbox gallery
-    initSimpleLightbox();
-    
-    // Initialize animations
-    initAnimations();
-    
-    // Initialize scroll margin for sections
-    setScrollMargin();
-    
-    // Initialize form validation
-    initFormValidation();
-    
-    // Initialize smooth scrolling
-    initSmoothScrolling();
-    
-    // Initialize navbar scroll effect
-    initNavbarScroll();
-    
-    // Initialize back to top button
-    initBackToTop();
-    
-    // Initialize testimonials slider
-    initTestimonialsSlider();
-    
-    // Initialize clients slider
-    initClientsSlider();
-    
-    // Initialize custom alerts
-    initCustomAlerts();
-    
-    // Initialize WhatsApp button
-    initWhatsAppButton();
-    
-    // Initialize stats counter
-    initStatsCounter();
-    
-    // Add print button functionality
-    initPrintButton();
-    
-    console.log('Initialization complete!');
+    try {
+        // Urutan inisialisasi yang penting
+        initMobileDetection();
+        setCurrentYear();
+        initNavbarResponsive();
+        initSmoothScrolling();
+        initNavbarScroll();
+        initBackToTop();
+        initSimpleLightbox();
+        initFormValidation();
+        initTestimonialsSlider();
+        initClientsSlider();
+        initCustomAlerts();
+        initStatsCounter();
+        setScrollMargin();
+        initScrollAnimations();
+        initWhatsAppButtons();
+        
+        console.log('✅ Initialization complete!');
+        
+        // Tampilkan welcome message setelah semua inisialisasi
+        setTimeout(() => {
+            if (!sessionStorage.getItem('welcomeShown')) {
+                showAlert('Selamat datang di CV SR PUSPA JAYA! Spesialis Teralis & Reklame Profesional.', 'info');
+                sessionStorage.setItem('welcomeShown', 'true');
+            }
+        }, 1500);
+        
+    } catch (error) {
+        console.error('❌ Initialization error:', error);
+        showAlert('Maaf, terjadi kesalahan saat memuat halaman. Silakan refresh.', 'error');
+    }
 });
 
 // ============================================
-// SIMPLE LIGHTBOX GALLERY FUNCTIONALITY
+// MOBILE DETECTION & RESPONSIVE HELPERS
 // ============================================
 
-let currentImageIndex = 0;
-let galleryImages = [];
-
-// Initialize simple lightbox (untuk gallery sederhana)
-function initSimpleLightbox() {
-    console.log('Initializing Simple Gallery Lightbox...');
+function initMobileDetection() {
+    const isMobile = window.innerWidth <= 768;
+    const isTablet = window.innerWidth <= 992;
     
-    // Get all gallery images (class gallery-item img)
+    // Tambahkan class ke body untuk styling responsif
+    if (isMobile) {
+        document.body.classList.add('mobile-device');
+    }
+    if (isTablet) {
+        document.body.classList.add('tablet-device');
+    }
+    
+    console.log(`📱 Device detection: Mobile=${isMobile}, Tablet=${isTablet}`);
+    
+    // Update pada resize
+    window.addEventListener('resize', debounce(function() {
+        const nowMobile = window.innerWidth <= 768;
+        const nowTablet = window.innerWidth <= 992;
+        
+        document.body.classList.toggle('mobile-device', nowMobile);
+        document.body.classList.toggle('tablet-device', nowTablet);
+    }, 250));
+}
+
+// ============================================
+// CURRENT YEAR IN FOOTER
+// ============================================
+
+function setCurrentYear() {
+    try {
+        const yearElement = document.getElementById('currentYear');
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+    } catch (error) {
+        console.warn('Could not set current year:', error);
+    }
+}
+
+// ============================================
+// NAVBAR RESPONSIVE BEHAVIOR
+// ============================================
+
+function initNavbarResponsive() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    if (!navbarToggler || !navbarCollapse) return;
+    
+    // Deteksi klik di luar navbar untuk menutup di mobile
+    document.addEventListener('click', function(event) {
+        const isClickInsideNavbar = navbarCollapse.contains(event.target) || 
+                                   navbarToggler.contains(event.target);
+        
+        if (navbarCollapse.classList.contains('show') && !isClickInsideNavbar && window.innerWidth < 992) {
+            navbarToggler.click();
+        }
+    });
+    
+    // Update status navbar collapse
+    navbarCollapse.addEventListener('show.bs.collapse', () => {
+        navbarCollapsed = true;
+        document.body.style.overflow = 'hidden';
+    });
+    
+    navbarCollapse.addEventListener('hide.bs.collapse', () => {
+        navbarCollapsed = false;
+        document.body.style.overflow = '';
+    });
+    
+    // Navbar link klik untuk mobile
+    const navLinks = navbarCollapse.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth < 992) {
+                setTimeout(() => {
+                    navbarToggler.click();
+                }, 300);
+            }
+        });
+    });
+}
+
+// ============================================
+// SIMPLE LIGHTBOX GALLERY - RESPONSIF
+// ============================================
+
+function initSimpleLightbox() {
     const galleryItems = document.querySelectorAll('.gallery-item img');
     
     if (galleryItems.length === 0) {
-        console.warn('No gallery images found. Check if .gallery-item img exists.');
+        console.log('ℹ️ No gallery images found');
         return;
     }
     
-    console.log(`Found ${galleryItems.length} gallery images`);
+    console.log(`🖼️ Found ${galleryItems.length} gallery images`);
     
-    // Store images in array
+    // Kumpulkan data gambar
     galleryImages = Array.from(galleryItems).map((img, index) => ({
         src: img.src,
-        alt: img.alt || `Gambar ${index + 1}`,
+        alt: img.alt || `Gambar karya ${index + 1}`,
         index: index
     }));
     
-    // Add click event to each image
+    // Tambahkan event listener untuk gambar
     galleryImages.forEach((item, index) => {
         const imgElement = galleryItems[index];
-        imgElement.style.cursor = 'pointer';
+        imgElement.style.cursor = 'zoom-in';
         
+        // Touch support untuk mobile
         imgElement.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             openSimpleLightbox(index);
+        });
+        
+        // Tambahkan keyboard enter support
+        imgElement.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                openSimpleLightbox(index);
+            }
         });
     });
     
-    // Create lightbox elements
+    // Buat elemen lightbox jika belum ada
     createSimpleLightboxElements();
 }
 
-// Create simple lightbox HTML elements
 function createSimpleLightboxElements() {
-    // Check if lightbox already exists
     if (document.getElementById('simple-lightbox')) return;
     
-    console.log('Creating Simple Lightbox Elements...');
-    
-    // Create lightbox container
-    const lightbox = document.createElement('div');
-    lightbox.id = 'simple-lightbox';
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-        <button class="lightbox-close" onclick="closeSimpleLightbox()">
-            <i class="bi bi-x-lg"></i>
-        </button>
-        <button class="lightbox-prev" onclick="prevSimpleImage()">
-            <i class="bi bi-chevron-left"></i>
-        </button>
-        <div class="lightbox-content">
-            <div class="lightbox-counter" id="lightbox-counter">1 / ${galleryImages.length}</div>
-            <img id="lightbox-img" src="" alt="">
+    const lightboxHTML = `
+        <div id="simple-lightbox" class="lightbox" role="dialog" aria-label="Galeri gambar" aria-hidden="true">
+            <div class="lightbox-overlay" onclick="closeSimpleLightbox()"></div>
+            <button class="lightbox-close" onclick="closeSimpleLightbox()" aria-label="Tutup galeri">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <button class="lightbox-prev" onclick="prevSimpleImage()" aria-label="Gambar sebelumnya">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <div class="lightbox-content">
+                <div class="lightbox-counter" id="lightbox-counter">1 / ${galleryImages.length}</div>
+                <img id="lightbox-img" src="" alt="" loading="eager">
+                <div class="lightbox-caption" id="lightbox-caption"></div>
+            </div>
+            <button class="lightbox-next" onclick="nextSimpleImage()" aria-label="Gambar berikutnya">
+                <i class="bi bi-chevron-right"></i>
+            </button>
         </div>
-        <button class="lightbox-next" onclick="nextSimpleImage()">
-            <i class="bi bi-chevron-right"></i>
-        </button>
     `;
     
-    document.body.appendChild(lightbox);
+    document.body.insertAdjacentHTML('beforeend', lightboxHTML);
 }
 
-// Open simple lightbox
 function openSimpleLightbox(index = 0) {
-    if (galleryImages.length === 0) {
-        console.warn('No gallery images found');
+    if (!galleryImages || galleryImages.length === 0) {
+        showAlert('Tidak ada gambar untuk ditampilkan.', 'warning');
         return;
     }
     
+    // Validasi index
+    if (index < 0) index = 0;
+    if (index >= galleryImages.length) index = galleryImages.length - 1;
+    
     currentImageIndex = index;
-    updateSimpleLightbox();
     
     const lightbox = document.getElementById('simple-lightbox');
-    if (!lightbox) return;
+    const img = galleryImages[currentImageIndex];
     
+    if (!lightbox || !img) return;
+    
+    // Update konten
+    updateSimpleLightbox();
+    
+    // Tampilkan lightbox
     lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
     
-    // Prevent body scroll
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = getScrollbarWidth() + 'px';
+    // Lock scroll untuk mobile
+    if (window.innerWidth <= 768) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+    }
     
-    // Add keyboard navigation
+    // Tambahkan keyboard navigation
     document.addEventListener('keydown', handleSimpleKeydown);
     
-    console.log(`Lightbox opened - Image ${index + 1}/${galleryImages.length}`);
+    console.log(`🔍 Lightbox opened: ${currentImageIndex + 1}/${galleryImages.length}`);
 }
 
-// Close simple lightbox
 function closeSimpleLightbox() {
     const lightbox = document.getElementById('simple-lightbox');
     if (!lightbox) return;
     
     lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
     
-    // Restore body scroll
-    document.body.style.overflow = 'auto';
-    document.body.style.paddingRight = '0';
+    // Restore scroll
+    if (window.innerWidth <= 768) {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+    }
     
-    // Remove keyboard navigation
+    // Hapus keyboard navigation
     document.removeEventListener('keydown', handleSimpleKeydown);
-    
-    console.log('Lightbox closed');
 }
 
-// Update simple lightbox content
 function updateSimpleLightbox() {
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxCaption = document.getElementById('lightbox-caption');
     
     if (!lightboxImg || !galleryImages[currentImageIndex]) return;
     
     const image = galleryImages[currentImageIndex];
     
-    // Add loading state
-    lightboxImg.style.opacity = '0.7';
+    // Loading state
+    lightboxImg.style.opacity = '0.5';
+    lightboxImg.style.filter = 'blur(5px)';
     
-    // Preload image
-    const img = new Image();
-    img.src = image.src;
-    img.onload = () => {
+    // Preload gambar
+    const imgLoader = new Image();
+    imgLoader.src = image.src;
+    
+    imgLoader.onload = () => {
         lightboxImg.src = image.src;
         lightboxImg.alt = image.alt;
         lightboxImg.style.opacity = '1';
+        lightboxImg.style.filter = 'blur(0)';
+        
+        if (lightboxCaption) {
+            lightboxCaption.textContent = image.alt;
+        }
     };
     
-    img.onerror = () => {
+    imgLoader.onerror = () => {
         lightboxImg.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIGZpbGw9IiNGNUY1RjUiLz48cGF0aCBkPSJNMzAgMjBDMjYuMTM0IDIwIDIzIDIzLjEzNCAyMyAyN0MyMyAzMC44NjYgMjYuMTM0IDM0IDMwIDM0QzMzLjg2NiAzNCAzNyAzMC44NjYgMzcgMjdDMzcgMjMuMTM0IDMzLjg2NiAyMCAzMCAyMFpNMjAgMzJDMjAgMjYuNDc3IDI0LjQ3NyAyMiAzMCAyMkMzNS41MjMgMjIgNDAgMjYuNDc3IDQwIDMyQzQwIDM3LjUyMyAzNS41MjMgNDIgMzAgNDJDMjQuNDc3IDQyIDIwIDM3LjUyMyAyMCAzMlpNMjAgMzVDMTguODk1IDM1IDE4IDM1Ljg5NSAxOCAzN0MxOCAzOC4xMDUgMTguODk1IDM5IDIwIDM5SDQwQzQxLjEwNSAzOSA0MiAzOC4xMDUgNDIgMzdDNDIgMzUuODk1IDQxLjEwNSAzNSA0MCAzNUgyMFoiIGZpbGw9IiNGRjZCNkIiLz48L3N2Zz4=';
-        lightboxImg.alt = 'Gambar tidak ditemukan';
+        lightboxImg.alt = 'Gambar tidak dapat dimuat';
         lightboxImg.style.opacity = '1';
+        lightboxImg.style.filter = 'blur(0)';
+        
+        if (lightboxCaption) {
+            lightboxCaption.textContent = 'Gambar tidak dapat dimuat';
+        }
     };
     
+    // Update counter
     if (lightboxCounter) {
         lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
     }
 }
 
-// Navigate to next image
 function nextSimpleImage() {
-    if (galleryImages.length === 0) return;
+    if (!galleryImages || galleryImages.length === 0) return;
+    
     currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
     updateSimpleLightbox();
 }
 
-// Navigate to previous image
 function prevSimpleImage() {
-    if (galleryImages.length === 0) return;
+    if (!galleryImages || galleryImages.length === 0) return;
+    
     currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
     updateSimpleLightbox();
 }
 
-// Handle keyboard navigation for simple lightbox
 function handleSimpleKeydown(e) {
-    if (galleryImages.length === 0) return;
+    if (!galleryImages || galleryImages.length === 0) return;
     
     switch(e.key) {
         case 'Escape':
             closeSimpleLightbox();
             break;
         case 'ArrowRight':
+        case 'd':
+        case 'D':
             nextSimpleImage();
             break;
         case 'ArrowLeft':
+        case 'a':
+        case 'A':
             prevSimpleImage();
             break;
         case ' ':
@@ -232,85 +352,56 @@ function handleSimpleKeydown(e) {
     }
 }
 
-// Close lightbox when clicking outside image
-document.addEventListener('click', (e) => {
-    const lightbox = document.getElementById('simple-lightbox');
-    if (lightbox && lightbox.classList.contains('active') && e.target === lightbox) {
-        closeSimpleLightbox();
-    }
-});
-
 // ============================================
-// SMOOTH SCROLLING & NAVIGATION
+// SMOOTH SCROLLING - DIOPTIMALKAN
 // ============================================
 
 function initSmoothScrolling() {
-    console.log('Initializing Smooth Scrolling...');
-    
-    // Smooth scrolling for navigation links
+    // Smooth scrolling untuk semua anchor link
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Skip untuk link yang tidak perlu smooth scroll
+        if (anchor.hash === '#!' || anchor.hash === '#' || 
+            anchor.getAttribute('href') === '#lightbox' ||
+            anchor.getAttribute('data-no-scroll') === 'true') {
+            return;
+        }
+        
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             
-            // Skip if target is # or #lightbox or javascript links
-            if (targetId === '#' || targetId === '#lightbox' || targetId.startsWith('javascript:')) return;
+            // Skip jika bukan anchor
+            if (!targetId.startsWith('#')) return;
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
                 
-                // Close navbar collapse on mobile after clicking a link
-                const navbarCollapse = document.querySelector('.navbar-collapse');
-                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                // Tutup navbar mobile jika terbuka
+                if (window.innerWidth < 992 && navbarCollapsed) {
                     const navbarToggler = document.querySelector('.navbar-toggler');
-                    if (navbarToggler) navbarToggler.click();
+                    if (navbarToggler) {
+                        navbarToggler.click();
+                    }
                 }
                 
-                // Calculate offset based on device
-                const offset = window.innerWidth < 768 ? 70 : 80;
+                // Hitung offset berdasarkan device
+                const navbarHeight = window.innerWidth < 768 ? 70 : 80;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = targetPosition - navbarHeight;
                 
-                // Smooth scroll to target
+                // Smooth scroll
                 window.scrollTo({
-                    top: targetElement.offsetTop - offset,
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
                 
-                // Update active nav link
-                updateActiveNavLink(targetId);
+                // Update URL tanpa refresh (optional)
+                history.pushState(null, null, targetId);
                 
-                console.log(`Smooth scrolling to: ${targetId}`);
+                console.log(`↕️ Scrolled to: ${targetId}`);
             }
         });
     });
-}
-
-// Update active nav link
-function updateActiveNavLink(sectionId) {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === sectionId) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Update active nav link on scroll
-function updateActiveNavOnScroll() {
-    let current = '';
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPosition = window.scrollY + 100;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    if (current) {
-        updateActiveNavLink('#' + current);
-    }
 }
 
 // ============================================
@@ -321,17 +412,32 @@ function initNavbarScroll() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
     
-    window.addEventListener('scroll', () => {
-        // Navbar scroll effect
-        if (window.scrollY > 50) {
+    let lastScrollTop = 0;
+    const navbarHeight = navbar.offsetHeight;
+    
+    window.addEventListener('scroll', throttle(function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add/remove scrolled class
+        if (scrollTop > navbarHeight) {
             navbar.classList.add('navbar-scrolled');
         } else {
             navbar.classList.remove('navbar-scrolled');
         }
         
-        // Update active nav link based on scroll position
-        updateActiveNavOnScroll();
-    });
+        // Hide/show navbar on scroll (mobile only)
+        if (window.innerWidth < 768) {
+            if (scrollTop > lastScrollTop && scrollTop > navbarHeight) {
+                // Scroll down - hide navbar
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                // Scroll up - show navbar
+                navbar.style.transform = 'translateY(0)';
+            }
+        }
+        
+        lastScrollTop = scrollTop;
+    }, 100));
 }
 
 // ============================================
@@ -342,507 +448,492 @@ function initBackToTop() {
     const backToTop = document.querySelector('.back-to-top');
     if (!backToTop) return;
     
-    window.addEventListener('scroll', () => {
-        // Back to top button
-        if (window.scrollY > 300) {
+    window.addEventListener('scroll', throttle(function() {
+        if (window.pageYOffset > 300) {
             backToTop.classList.add('active');
+            backToTop.setAttribute('aria-hidden', 'false');
         } else {
             backToTop.classList.remove('active');
+            backToTop.setAttribute('aria-hidden', 'true');
         }
-    });
+    }, 150));
     
-    // Add click event to back to top button
-    backToTop.addEventListener('click', (e) => {
+    // Click handler
+    backToTop.addEventListener('click', function(e) {
         e.preventDefault();
+        
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
+        
+        // Fokus ke navbar brand setelah scroll
+        setTimeout(() => {
+            const navbarBrand = document.querySelector('.navbar-brand');
+            if (navbarBrand) {
+                navbarBrand.focus();
+            }
+        }, 500);
     });
 }
 
 // ============================================
-// CONTACT FORM FUNCTIONALITY
+// CONTACT FORM VALIDATION - DIPERBAIKI
 // ============================================
 
 function initFormValidation() {
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) {
-        console.log('Contact form not found');
+        console.log('ℹ️ Contact form not found');
         return;
     }
     
-    console.log('Initializing Contact Form...');
+    console.log('📝 Initializing Contact Form...');
     
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value.trim();
-        
-        // Validation flags
-        let isValid = true;
-        let errorMessage = '';
-        
-        // Name validation
-        if (!name) {
-            isValid = false;
-            errorMessage = 'Nama lengkap wajib diisi!';
-        }
-        
-        // Phone validation
-        if (!phone) {
-            isValid = false;
-            errorMessage = 'Nomor telepon wajib diisi!';
-        } else {
-            const phoneRegex = /^[0-9+\-\s()]{10,15}$/;
-            if (!phoneRegex.test(phone)) {
-                isValid = false;
-                errorMessage = 'Format nomor telepon tidak valid!';
-            }
-        }
-        
-        // Email validation
-        if (!email) {
-            isValid = false;
-            errorMessage = 'Email wajib diisi!';
-        } else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                isValid = false;
-                errorMessage = 'Format email tidak valid!';
-            }
-        }
-        
-        // Subject validation
-        if (!subject) {
-            isValid = false;
-            errorMessage = 'Pilih jenis layanan!';
-        }
-        
-        // Message validation
-        if (!message) {
-            isValid = false;
-            errorMessage = 'Pesan wajib diisi!';
-        } else if (message.length < 10) {
-            isValid = false;
-            errorMessage = 'Pesan terlalu pendek! Minimal 10 karakter.';
-        }
-        
-        if (!isValid) {
-            showAlert(errorMessage, 'error');
-            return;
-        }
-        
-        // Create WhatsApp message
-        const whatsappMessage = `Halo CV SR PUSPA JAYA,%0A%0A`
-            + `Nama: ${name}%0A`
-            + `Telepon: ${phone}%0A`
-            + `Email: ${email}%0A`
-            + `Layanan: ${subject}%0A`
-            + `Pesan: ${message}%0A%0A`
-            + `Saya ingin berkonsultasi mengenai layanan Anda.`;
-        
-        // Show success message
-        showAlert(`Terima kasih ${name}! Anda akan diarahkan ke WhatsApp untuk melanjutkan konsultasi.`, 'success');
-        
-        // Add loading state to button
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.innerHTML;
-        submitButton.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Mengirim...';
-        submitButton.disabled = true;
-        
-        // Open WhatsApp after delay
-        setTimeout(() => {
-            window.open(`https://wa.me/6281234567890?text=${whatsappMessage}`, '_blank');
-            
-            // Restore button state
-            submitButton.innerHTML = originalText;
-            submitButton.disabled = false;
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Track form submission
-            console.log('Form submitted successfully:', { name, phone, email, subject });
-            
-        }, 1500);
-    });
-    
-    // Add real-time validation
+    // Real-time validation
     const formInputs = contactForm.querySelectorAll('input, select, textarea');
     formInputs.forEach(input => {
+        // Validasi saat blur
         input.addEventListener('blur', function() {
             validateField(this);
         });
-    });
-}
-
-// Validate individual form field
-function validateField(field) {
-    const value = field.value.trim();
-    
-    if (field.hasAttribute('required') && !value) {
-        field.classList.add('is-invalid');
-        field.classList.remove('is-valid');
-        return false;
-    }
-    
-    if (field.type === 'email' && value) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-            field.classList.add('is-invalid');
-            field.classList.remove('is-valid');
-            return false;
-        }
-    }
-    
-    if (field.type === 'tel' && value) {
-        const phoneRegex = /^[0-9+\-\s()]{10,15}$/;
-        if (!phoneRegex.test(value)) {
-            field.classList.add('is-invalid');
-            field.classList.remove('is-valid');
-            return false;
-        }
-    }
-    
-    field.classList.remove('is-invalid');
-    field.classList.add('is-valid');
-    return true;
-}
-
-// ============================================
-// ANIMATIONS & INTERSECTION OBSERVER
-// ============================================
-
-function initAnimations() {
-    console.log('Initializing Animations...');
-    
-    // Intersection Observer options
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-    
-    // Create observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add animation class
-                entry.target.classList.add('animated');
-                
-                observer.unobserve(entry.target);
+        
+        // Hapus error saat typing
+        input.addEventListener('input', function() {
+            if (this.classList.contains('is-invalid')) {
+                this.classList.remove('is-invalid');
             }
         });
-    }, observerOptions);
-    
-    // Observe all animate-able elements
-    const animateElements = document.querySelectorAll(
-        '.service-card, .gallery-item, .testimonial-card, .value-box, .description-card, .client-logo'
-    );
-    
-    animateElements.forEach(el => {
-        observer.observe(el);
     });
     
-    console.log(`Observing ${animateElements.length} elements for animation`);
+    // Form submission
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validasi semua field
+        let isValid = true;
+        let firstInvalidField = null;
+        
+        formInputs.forEach(input => {
+            if (!validateField(input) && isValid) {
+                isValid = false;
+                firstInvalidField = input;
+            }
+        });
+        
+        if (!isValid) {
+            // Scroll ke field pertama yang invalid
+            if (firstInvalidField) {
+                firstInvalidField.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                firstInvalidField.focus();
+            }
+            
+            showAlert('Harap perbaiki data yang masih salah.', 'error');
+            return;
+        }
+        
+        // Get form data
+        const formData = {
+            name: sanitizeInput(document.getElementById('name').value),
+            phone: sanitizeInput(document.getElementById('phone').value),
+            email: sanitizeInput(document.getElementById('email').value),
+            subject: document.getElementById('subject').value,
+            message: sanitizeInput(document.getElementById('message').value),
+            timestamp: new Date().toISOString()
+        };
+        
+        // Kirim data (simulasi)
+        submitFormData(formData);
+    });
+}
+
+function validateField(field) {
+    const value = field.value.trim();
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Required validation
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        errorMessage = 'Field ini wajib diisi';
+    }
+    
+    // Email validation
+    if (field.type === 'email' && value && isValid) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            isValid = false;
+            errorMessage = 'Format email tidak valid';
+        }
+    }
+    
+    // Phone validation
+    if (field.type === 'tel' && value && isValid) {
+        const phoneRegex = /^[\+]?[0-9\-\s\(\)]{10,15}$/;
+        if (!phoneRegex.test(value)) {
+            isValid = false;
+            errorMessage = 'Format nomor telepon tidak valid';
+        }
+    }
+    
+    // Update UI
+    if (!isValid) {
+        field.classList.add('is-invalid');
+        field.classList.remove('is-valid');
+        
+        // Show error tooltip
+        if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('invalid-feedback')) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'invalid-feedback';
+            errorDiv.textContent = errorMessage;
+            field.parentNode.appendChild(errorDiv);
+        }
+    } else {
+        field.classList.remove('is-invalid');
+        field.classList.add('is-valid');
+        
+        // Remove error tooltip
+        const errorDiv = field.parentNode.querySelector('.invalid-feedback');
+        if (errorDiv) {
+            errorDiv.remove();
+        }
+    }
+    
+    return isValid;
+}
+
+function sanitizeInput(input) {
+    return input.trim()
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#x27;');
+}
+
+function submitFormData(formData) {
+    console.log('📤 Form data to submit:', formData);
+    
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
+    const originalState = submitButton.disabled;
+    
+    // Show loading state
+    submitButton.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Mengirim...';
+    submitButton.disabled = true;
+    
+    // Simulasi pengiriman data
+    setTimeout(() => {
+        // Success scenario
+        showAlert(`Terima kasih ${formData.name}! Pesan Anda telah dikirim. Kami akan menghubungi Anda dalam 1x24 jam.`, 'success');
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Remove validation classes
+        contactForm.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
+            el.classList.remove('is-valid', 'is-invalid');
+        });
+        
+        // Remove error messages
+        contactForm.querySelectorAll('.invalid-feedback').forEach(el => {
+            el.remove();
+        });
+        
+        // Restore button
+        submitButton.innerHTML = originalText;
+        submitButton.disabled = originalState;
+        
+        // Optional: Send to WhatsApp
+        const shouldOpenWhatsApp = confirm('Buka WhatsApp untuk konsultasi lebih lanjut?');
+        if (shouldOpenWhatsApp) {
+            const whatsappMessage = `Halo CV SR PUSPA JAYA,%0A%0A`
+                + `Nama: ${formData.name}%0A`
+                + `Telepon: ${formData.phone}%0A`
+                + `Email: ${formData.email}%0A`
+                + `Layanan: ${formData.subject}%0A`
+                + `Pesan: ${formData.message}`;
+            
+            window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+        }
+        
+    }, 1500);
 }
 
 // ============================================
-// TESTIMONIALS SLIDER
+// TESTIMONIALS SLIDER - RESPONSIF
 // ============================================
 
 function initTestimonialsSlider() {
-    const testimonialsContainer = document.querySelector('.testimonials-wrapper');
-    if (!testimonialsContainer) return;
-    
     const testimonialCards = document.querySelectorAll('.testimonial-card');
     if (testimonialCards.length === 0) return;
     
-    console.log(`Initializing Testimonials Slider - ${testimonialCards.length} testimonials`);
+    console.log(`💬 Found ${testimonialCards.length} testimonials`);
     
-    // Simple auto-rotate testimonials
-    let currentTestimonial = 0;
-    
-    function rotateTestimonials() {
-        testimonialCards.forEach((card, index) => {
-            card.style.opacity = '0.7';
-            card.style.transform = 'scale(0.95)';
+    // Hanya aktifkan auto-rotate di desktop
+    if (window.innerWidth > 768) {
+        let currentIndex = 0;
+        
+        const rotateTestimonials = () => {
+            testimonialCards.forEach((card, index) => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = index === currentIndex ? '1' : '0.6';
+                card.style.transform = index === currentIndex ? 'translateY(0)' : 'translateY(10px)';
+            });
             
-            if (index === currentTestimonial) {
-                card.style.opacity = '1';
-                card.style.transform = 'scale(1)';
+            currentIndex = (currentIndex + 1) % testimonialCards.length;
+        };
+        
+        // Mulai rotasi
+        setInterval(rotateTestimonials, 5000);
+        
+        // Rotasi pertama
+        setTimeout(rotateTestimonials, 1000);
+    }
+    
+    // Tambahkan hover effect untuk semua device
+    testimonialCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 768) {
+                card.style.transform = 'translateY(-5px) scale(1.02)';
+                card.style.boxShadow = '0 15px 40px rgba(0,0,0,0.15)';
             }
         });
         
-        currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-    }
-    
-    // Start rotation if on desktop
-    if (window.innerWidth > 768) {
-        setInterval(rotateTestimonials, 5000);
-    }
+        card.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 768) {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = '';
+            }
+        });
+    });
 }
 
 // ============================================
-// CLIENTS SLIDER
+// CLIENTS SLIDER - RESPONSIF
 // ============================================
 
 function initClientsSlider() {
-    const clientsSlider = document.querySelector('.clients-slider');
-    if (!clientsSlider) return;
-    
     const clientSlides = document.querySelectorAll('.client-slide');
     if (clientSlides.length === 0) return;
     
-    console.log(`Initializing Clients Slider - ${clientSlides.length} clients`);
+    console.log(`🤝 Found ${clientSlides.length} client logos`);
     
-    // Simple hover effects for clients
-    clientSlides.forEach(slide => {
-        slide.addEventListener('mouseenter', () => {
-            slide.style.transform = 'translateY(-10px)';
+    // Hover effects untuk desktop
+    if (window.innerWidth > 768) {
+        clientSlides.forEach(slide => {
+            slide.addEventListener('mouseenter', () => {
+                slide.style.transform = 'translateY(-8px)';
+                slide.style.transition = 'transform 0.3s ease';
+            });
+            
+            slide.addEventListener('mouseleave', () => {
+                slide.style.transform = 'translateY(0)';
+            });
         });
+    }
+    
+    // Touch/swipe support untuk mobile
+    if (window.innerWidth <= 768) {
+        let startX = 0;
+        let startY = 0;
         
-        slide.addEventListener('mouseleave', () => {
-            slide.style.transform = 'translateY(0)';
-        });
-    });
-}
-
-// ============================================
-// STATS COUNTER ANIMATION
-// ============================================
-
-function initStatsCounter() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    if (statNumbers.length === 0) return;
-    
-    console.log(`Initializing Stats Counter - ${statNumbers.length} stats`);
-    
-    // Create observer for stats section
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateStats();
-                statsObserver.unobserve(entry.target);
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        document.addEventListener('touchend', (e) => {
+            if (!startX || !startY) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            
+            // Only horizontal swipe
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                // Simple visual feedback
+                clientSlides.forEach(slide => {
+                    slide.style.transform = diffX > 0 ? 'translateX(-10px)' : 'translateX(10px)';
+                    setTimeout(() => {
+                        slide.style.transform = 'translateX(0)';
+                    }, 300);
+                });
             }
-        });
-    }, { threshold: 0.5 });
-    
-    // Observe stats section
-    const statsSection = document.querySelector('.stats-row');
-    if (statsSection) {
-        statsObserver.observe(statsSection);
+        }, { passive: true });
     }
 }
 
-function animateStats() {
-    const counters = document.querySelectorAll('.stat-number');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count')) || 0;
-        const duration = 2000; // 2 seconds
-        const increment = target / (duration / 16);
-        let current = 0;
-        
-        const updateCounter = () => {
-            if (current < target) {
-                current += increment;
-                if (current > target) current = target;
-                counter.textContent = Math.floor(current);
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target;
-            }
-        };
-        
-        updateCounter();
-    });
-}
-
 // ============================================
-// WHATSAPP BUTTON FUNCTIONALITY
-// ============================================
-
-function initWhatsAppButton() {
-    const whatsappButtons = document.querySelectorAll('a[href*="whatsapp"], a[href*="wa.me"]');
-    
-    whatsappButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            // Only track if opening in new tab
-            if (!this.target || this.target === '_self') {
-                e.preventDefault();
-                
-                const phone = '6281234567890';
-                const message = 'Halo CV SR PUSPA JAYA, saya ingin berkonsultasi mengenai layanan Anda.';
-                const encodedMessage = encodeURIComponent(message);
-                
-                window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
-                
-                console.log('WhatsApp button clicked');
-            }
-        });
-    });
-}
-
-// ============================================
-// CUSTOM ALERTS SYSTEM
+// CUSTOM ALERTS SYSTEM - DIPERBAIKI
 // ============================================
 
 function initCustomAlerts() {
-    // Add custom alert styles
-    const alertStyles = document.createElement('style');
-    alertStyles.textContent = `
-        .custom-alert {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-width: 300px;
-            max-width: 400px;
-            z-index: 9999;
-            animation: slideInRight 0.3s ease;
-            border-left: 4px solid #FF6B6B;
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        .alert-success {
-            border-left-color: #28a745;
-        }
-        
-        .alert-error {
-            border-left-color: #dc3545;
-        }
-        
-        .alert-warning {
-            border-left-color: #ffc107;
-        }
-        
-        .alert-info {
-            border-left-color: #17a2b8;
-        }
-        
-        .alert-content {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex: 1;
-        }
-        
-        .alert-content i {
-            font-size: 1.2rem;
-        }
-        
-        .alert-success .alert-content i {
-            color: #28a745;
-        }
-        
-        .alert-error .alert-content i {
-            color: #dc3545;
-        }
-        
-        .alert-warning .alert-content i {
-            color: #ffc107;
-        }
-        
-        .alert-info .alert-content i {
-            color: #17a2b8;
-        }
-        
-        .alert-close {
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            padding: 0.25rem;
-            margin-left: 1rem;
-            transition: color 0.3s ease;
-        }
-        
-        .alert-close:hover {
-            color: #333;
-        }
-        
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        .alert-hiding {
-            animation: slideOutRight 0.3s ease forwards;
-        }
-        
-        @media (max-width: 576px) {
+    // Inject alert styles
+    if (!document.getElementById('alert-styles')) {
+        const alertStyles = document.createElement('style');
+        alertStyles.id = 'alert-styles';
+        alertStyles.textContent = `
             .custom-alert {
-                min-width: auto;
-                width: calc(100% - 40px);
+                position: fixed;
+                top: 20px;
                 right: 20px;
-                left: 20px;
-                top: 80px;
+                background: white;
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                min-width: 300px;
+                max-width: 400px;
+                z-index: 99999;
+                animation: alertSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+                border-left: 5px solid;
+                font-family: 'Roboto', sans-serif;
+                backdrop-filter: blur(10px);
+                background: rgba(255, 255, 255, 0.95);
             }
-        }
-    `;
-    
-    document.head.appendChild(alertStyles);
+            
+            .alert-success { border-left-color: #28a745; }
+            .alert-error { border-left-color: #dc3545; }
+            .alert-warning { border-left-color: #ffc107; }
+            .alert-info { border-left-color: #17a2b8; }
+            
+            .alert-content {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                flex: 1;
+            }
+            
+            .alert-content i {
+                font-size: 1.5rem;
+                flex-shrink: 0;
+            }
+            
+            .alert-success .alert-content i { color: #28a745; }
+            .alert-error .alert-content i { color: #dc3545; }
+            .alert-warning .alert-content i { color: #ffc107; }
+            .alert-info .alert-content i { color: #17a2b8; }
+            
+            .alert-text {
+                flex: 1;
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+            
+            .alert-close {
+                background: none;
+                border: none;
+                color: #666;
+                cursor: pointer;
+                padding: 0.25rem;
+                transition: all 0.2s ease;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+            
+            .alert-close:hover {
+                background: rgba(0,0,0,0.05);
+                color: #333;
+            }
+            
+            @keyframes alertSlideIn {
+                from {
+                    transform: translateX(100%) translateY(-20px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0) translateY(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes alertSlideOut {
+                from {
+                    transform: translateX(0) translateY(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%) translateY(-20px);
+                    opacity: 0;
+                }
+            }
+            
+            .alert-hiding {
+                animation: alertSlideOut 0.3s ease forwards;
+            }
+            
+            /* Mobile styles */
+            @media (max-width: 768px) {
+                .custom-alert {
+                    top: 10px;
+                    right: 10px;
+                    left: 10px;
+                    min-width: auto;
+                    max-width: none;
+                    padding: 0.875rem 1.25rem;
+                }
+                
+                .alert-text {
+                    font-size: 0.875rem;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .custom-alert {
+                    padding: 0.75rem 1rem;
+                }
+                
+                .alert-content i {
+                    font-size: 1.25rem;
+                }
+            }
+        `;
+        
+        document.head.appendChild(alertStyles);
+    }
 }
 
-// Show alert message
 function showAlert(message, type = 'info') {
-    // Remove existing alerts
-    const existingAlerts = document.querySelectorAll('.custom-alert');
-    existingAlerts.forEach(alert => {
-        alert.classList.add('alert-hiding');
-        setTimeout(() => {
-            if (alert.parentElement) {
-                alert.remove();
-            }
-        }, 300);
-    });
-    
     // Icon mapping
     const icons = {
-        success: 'bi-check-circle',
-        error: 'bi-exclamation-circle',
-        warning: 'bi-exclamation-triangle',
-        info: 'bi-info-circle'
+        success: 'bi-check-circle-fill',
+        error: 'bi-exclamation-circle-fill',
+        warning: 'bi-exclamation-triangle-fill',
+        info: 'bi-info-circle-fill'
     };
+    
+    // Remove existing alerts
+    const existingAlerts = document.querySelectorAll('.custom-alert');
+    existingAlerts.forEach((alert, index) => {
+        setTimeout(() => {
+            alert.classList.add('alert-hiding');
+            setTimeout(() => alert.remove(), 300);
+        }, index * 100);
+    });
     
     // Create alert element
     const alert = document.createElement('div');
     alert.className = `custom-alert alert-${type}`;
+    alert.setAttribute('role', 'alert');
+    alert.setAttribute('aria-live', 'assertive');
+    
     alert.innerHTML = `
         <div class="alert-content">
-            <i class="bi ${icons[type] || 'bi-info-circle'}"></i>
-            <span>${message}</span>
+            <i class="bi ${icons[type] || 'bi-info-circle-fill'}"></i>
+            <div class="alert-text">${message}</div>
         </div>
-        <button class="alert-close" onclick="this.parentElement.classList.add('alert-hiding'); setTimeout(() => this.parentElement.remove(), 300)">
+        <button class="alert-close" aria-label="Tutup notifikasi" onclick="this.parentElement.remove()">
             <i class="bi bi-x"></i>
         </button>
     `;
@@ -850,7 +941,7 @@ function showAlert(message, type = 'info') {
     // Add to body
     document.body.appendChild(alert);
     
-    // Auto remove after 5 seconds
+    // Auto-remove setelah 5 detik
     setTimeout(() => {
         if (alert.parentElement) {
             alert.classList.add('alert-hiding');
@@ -862,119 +953,186 @@ function showAlert(message, type = 'info') {
         }
     }, 5000);
     
-    console.log(`Alert shown: ${type} - ${message}`);
+    // Log untuk debugging
+    console.log(`📢 Alert: ${type.toUpperCase()} - ${message}`);
+    
+    return alert;
+}
+
+// ============================================
+// STATS COUNTER ANIMATION
+// ============================================
+
+function initStatsCounter() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length === 0) return;
+    
+    // Observer untuk stats section
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !statsAnimated) {
+                statsAnimated = true;
+                animateStats();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    // Observe stats section
+    const statsSection = document.querySelector('.stats-row') || document.querySelector('.stats-grid');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+}
+
+function animateStats() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count')) || 0;
+        const duration = 2000; // 2 detik
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            
+            if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+                
+                // Tambahkan efek setelah selesai
+                counter.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    counter.style.transform = 'scale(1)';
+                }, 300);
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// ============================================
+// SCROLL MARGIN UTILITIES
+// ============================================
+
+function setScrollMargin() {
+    // Set scroll margin untuk semua section dengan ID
+    document.querySelectorAll('section[id]').forEach(section => {
+        const offset = window.innerWidth < 768 ? '70px' : '80px';
+        section.style.scrollMarginTop = offset;
+    });
+}
+
+// ============================================
+// SCROLL ANIMATIONS
+// ============================================
+
+function initScrollAnimations() {
+    // Intersection Observer untuk animasi
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Element yang akan dianimasikan
+    const animatedElements = document.querySelectorAll(
+        '.service-card, .gallery-item, .testimonial-card, .value-box, .description-card, .client-logo'
+    );
+    
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+    
+    console.log(`🎨 Animating ${animatedElements.length} elements on scroll`);
+}
+
+// ============================================
+// WHATSAPP BUTTONS FUNCTIONALITY
+// ============================================
+
+function initWhatsAppButtons() {
+    const whatsappButtons = document.querySelectorAll('a[href*="whatsapp"], a[href*="wa.me"], .btn-whatsapp');
+    
+    whatsappButtons.forEach(button => {
+        // Pastikan semua WhatsApp button memiliki target="_blank"
+        if (!button.hasAttribute('target')) {
+            button.setAttribute('target', '_blank');
+        }
+        
+        // Tambahkan rel untuk security
+        button.setAttribute('rel', 'noopener noreferrer');
+        
+        // Tambahkan event untuk tracking (optional)
+        button.addEventListener('click', function() {
+            console.log('📱 WhatsApp button clicked');
+            
+            // Anda bisa menambahkan analytics tracking di sini
+            // Contoh: gtag('event', 'whatsapp_click', { 'event_category': 'engagement' });
+        });
+    });
 }
 
 // ============================================
 // UTILITY FUNCTIONS
 // ============================================
 
-// Set scroll margin for sections
-function setScrollMargin() {
-    const offset = window.innerWidth < 768 ? '70px' : '80px';
-    document.querySelectorAll('section[id]').forEach(section => {
-        section.style.scrollMarginTop = offset;
-    });
+// Debounce function untuk limit events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
-// Get scrollbar width
-function getScrollbarWidth() {
-    return window.innerWidth - document.documentElement.clientWidth;
-}
-
-// Adjust padding on resize
-window.addEventListener('resize', function() {
-    setScrollMargin();
-});
-
-// ============================================
-// PRINT FUNCTIONALITY
-// ============================================
-
-function initPrintButton() {
-    // Add print button if needed
-    const printButton = document.createElement('button');
-    printButton.innerHTML = '<i class="bi bi-printer"></i>';
-    printButton.className = 'print-button';
-    printButton.style.cssText = `
-        position: fixed;
-        bottom: 100px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
-        color: white;
-        border: none;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 1000;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-    `;
-    
-    printButton.addEventListener('mouseenter', () => {
-        printButton.style.transform = 'scale(1.1)';
-    });
-    
-    printButton.addEventListener('mouseleave', () => {
-        printButton.style.transform = 'scale(1)';
-    });
-    
-    printButton.addEventListener('click', () => {
-        window.print();
-    });
-    
-    // Add print styles
-    const printStyles = document.createElement('style');
-    printStyles.textContent = `
-        @media print {
-            .navbar,
-            .hero-cta,
-            .back-to-top,
-            .footer,
-            .print-button,
-            .cta-section {
-                display: none !important;
-            }
-            
-            body {
-                padding-top: 0;
-                font-size: 12pt;
-            }
-            
-            .hero-section {
-                min-height: auto;
-                background: none !important;
-                color: black !important;
-                padding: 2rem 0;
-            }
-            
-            .hero-title,
-            .section-title {
-                color: black !important;
-            }
-            
-            .container {
-                max-width: 100%;
-            }
-            
-            a {
-                color: black !important;
-                text-decoration: none;
-            }
-            
-            .btn {
-                display: none !important;
-            }
+// Throttle function untuk limit events
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
         }
-    `;
-    
-    document.head.appendChild(printStyles);
-    document.body.appendChild(printButton);
+    };
 }
+
+// ============================================
+// WINDOW RESIZE HANDLER
+// ============================================
+
+window.addEventListener('resize', debounce(function() {
+    // Update scroll margin
+    setScrollMargin();
+    
+    // Re-init components yang perlu responsive update
+    const lightbox = document.getElementById('simple-lightbox');
+    if (lightbox && lightbox.classList.contains('active')) {
+        // Adjust lightbox position jika terbuka
+        updateSimpleLightbox();
+    }
+    
+    console.log(`🔄 Window resized: ${window.innerWidth} x ${window.innerHeight}`);
+}, 250));
 
 // ============================================
 // ERROR HANDLING
@@ -982,42 +1140,54 @@ function initPrintButton() {
 
 // Global error handler
 window.addEventListener('error', function(e) {
-    console.error('JavaScript Error:', e.message, 'at', e.filename, ':', e.lineno);
+    console.error('❌ JavaScript Error:', e.message, 'at', e.filename, ':', e.lineno);
     
     // Show user-friendly error message
-    showAlert('Maaf, terjadi kesalahan teknis. Silakan refresh halaman.', 'error');
+    if (!e.message.includes('ResizeObserver') && !e.message.includes('Script error')) {
+        showAlert('Maaf, terjadi kesalahan teknis. Silakan refresh halaman.', 'error');
+    }
 });
 
 // Unhandled promise rejection
 window.addEventListener('unhandledrejection', function(e) {
-    console.error('Unhandled Promise Rejection:', e.reason);
+    console.error('❌ Unhandled Promise Rejection:', e.reason);
 });
 
 // ============================================
 // PERFORMANCE MONITORING
 // ============================================
 
-// Log page load performance
 window.addEventListener('load', function() {
-    const timing = performance.timing;
-    const loadTime = timing.loadEventEnd - timing.navigationStart;
-    console.log(`Page loaded in ${loadTime}ms`);
+    // Log page load performance
+    if (performance.getEntriesByType) {
+        const perfEntries = performance.getEntriesByType('navigation');
+        if (perfEntries[0]) {
+            const loadTime = perfEntries[0].loadEventEnd - perfEntries[0].startTime;
+            console.log(`⚡ Page loaded in ${Math.round(loadTime)}ms`);
+        }
+    }
     
-    // Show welcome message
-    setTimeout(() => {
-        showAlert('Selamat datang di CV SR PUSPA JAYA!', 'info');
-    }, 1000);
+    // Remove preloader jika ada
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 300);
+        }, 500);
+    }
 });
 
 // ============================================
 // EXPORT FUNCTIONS FOR GLOBAL USE
 // ============================================
 
-// Make functions available globally for HTML onclick attributes
-window.openLightbox = openSimpleLightbox;
-window.closeLightbox = closeSimpleLightbox;
-window.prevImage = prevSimpleImage;
-window.nextImage = nextSimpleImage;
+// Export fungsi ke global scope untuk HTML onclick attributes
+window.openSimpleLightbox = openSimpleLightbox;
+window.closeSimpleLightbox = closeSimpleLightbox;
+window.prevSimpleImage = prevSimpleImage;
+window.nextSimpleImage = nextSimpleImage;
 window.showAlert = showAlert;
 
-console.log('JavaScript loaded successfully!');
+console.log('🎯 All scripts loaded successfully!');
