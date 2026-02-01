@@ -5,6 +5,7 @@
     --secondary: #000000;
     --dark-red: #8B0000;
     --light-red: #FF6B6B;
+    --whatsapp-green: #25D366;
     --gray-bg: #f8f9fa;
     --dark-bg: #222222;
     --light-bg: #ffffff;
@@ -59,7 +60,7 @@ img {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -100,6 +101,7 @@ img {
 }
 
 /* ===== NAVBAR ===== */
+/* ===== NAVBAR - LOGO KIRI, MENU KANAN ===== */
 .navbar {
     padding: 0.5rem 0;
     transition: var(--transition);
@@ -108,41 +110,68 @@ img {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Container utama */
+.navbar > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+}
+
+/* Logo di kiri */
 .navbar-brand {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
 }
 
-.logo-circle {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
-    border-radius: 50%;
+/* Toggler button */
+.navbar-toggler {
+    border: none;
+    padding: 0.25rem;
+    font-size: 1rem;
+    margin-left: auto;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Navbar collapse area - INI YANG PENTING */
+.navbar-collapse {
+    flex-grow: 0 !important;
+    flex-basis: auto !important;
+}
+
+/* Navbar menu */
+.navbar-nav {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
+    justify-content: flex-end !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.company-name {
-    font-size: 1rem;
-    color: var(--text-dark);
-}
-
-.company-tagline {
-    font-size: 0.7rem;
-    line-height: 1.2;
+/* Style untuk nav items */
+.nav-item {
+    display: flex;
+    align-items: center;
+    margin: 0 0.25rem;
 }
 
 .nav-link {
     font-weight: 500;
     padding: 0.5rem 0.75rem !important;
     border-radius: 5px;
-    margin: 0 0.1rem;
     position: relative;
     font-size: 0.9rem;
+    color: var(--text-dark);
+    white-space: nowrap;
+    transition: var(--transition);
 }
 
 .nav-link:hover,
@@ -168,14 +197,21 @@ img {
     width: 100%;
 }
 
-.navbar-toggler {
-    border: none;
-    padding: 0.25rem;
-    font-size: 1rem;
+/* Tombol WhatsApp di navbar */
+.navbar .btn-success {
+    background-color: var(--whatsapp-green) !important;
+    border-color: var(--whatsapp-green) !important;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.375rem 0.75rem !important;
 }
 
-.navbar-toggler:focus {
-    box-shadow: none;
+.navbar .btn-success:hover {
+    background-color: #128C7E !important;
+    border-color: #128C7E !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
 }
 
 /* ===== NAVBAR LOGO STYLES ===== */
@@ -204,6 +240,101 @@ img {
     height: 100%;
     object-fit: contain;
     transition: var(--transition);
+}
+
+.company-name {
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.company-tagline {
+    font-size: 0.7rem;
+    line-height: 1.2;
+    color: var(--text-light);
+}
+
+/* ===== FIX UNTUK BOOTSTRAP ===== */
+.navbar-expand-lg .navbar-collapse {
+    justify-content: flex-end !important;
+    display: flex !important;
+}
+
+.navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 991px) {
+    .navbar > .container {
+        flex-wrap: wrap;
+    }
+    
+    .navbar-brand {
+        order: 1;
+    }
+    
+    .navbar-toggler {
+        order: 2;
+        margin-left: auto;
+    }
+    
+    .navbar-collapse {
+        order: 3;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        width: 100%;
+    }
+    
+    .nav-item {
+        width: 100%;
+        margin: 0 0 0.5rem 0 !important;
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 0.75rem 0 !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+    }
+    
+    .navbar .btn-success {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .nav-link::after {
+        display: none;
+    }
+}
+
+/* ===== DESKTOP LAYOUT ===== */
+@media (min-width: 992px) {
+    .navbar-collapse {
+        flex-grow: 0 !important;
+        flex-basis: auto !important;
+        width: auto;
+    }
+    
+    .navbar-nav {
+        justify-content: flex-end !important;
+        width: auto;
+    }
+    
+    /* Pastikan item terakhir (WhatsApp) benar-benar di ujung kanan */
+    .nav-item:last-child {
+        margin-right: 0 !important;
+    }
 }
 
 /* ===== HERO SECTION - FIXED FOR MOBILE ===== */
@@ -237,6 +368,7 @@ img {
     animation: fadeInUp 1s ease;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     line-height: 1.2;
+    color: white;
 }
 
 .hero-subtitle {
@@ -246,6 +378,7 @@ img {
     animation: fadeInUp 1s ease 0.3s both;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     opacity: 0.9;
+    color: white;
 }
 
 .hero-badge .badge {
@@ -348,6 +481,7 @@ img {
         padding: 0 10px !important;
         line-height: 1.3 !important;
         margin-top: 0.5rem !important;
+        color: white !important;
     }
     
     .hero-subtitle {
@@ -356,6 +490,7 @@ img {
         padding: 0 15px !important;
         line-height: 1.5 !important;
         opacity: 0.95 !important;
+        color: white !important;
     }
     
     /* CTA buttons mobile */
@@ -418,6 +553,7 @@ img {
         white-space: nowrap !important;
         margin: 0 !important;
         line-height: 1.2 !important;
+        color: white !important;
     }
     
     /* Scroll indicator mobile */
@@ -442,11 +578,13 @@ img {
     .hero-title {
         font-size: 1.6rem !important;
         padding: 0 8px !important;
+        color: white !important;
     }
     
     .hero-subtitle {
         font-size: 0.9rem !important;
         padding: 0 10px !important;
+        color: white !important;
     }
     
     .hero-features {
@@ -464,6 +602,7 @@ img {
     
     .feature-item p {
         font-size: 0.75rem !important;
+        color: white !important;
     }
     
     .hero-cta .btn {
@@ -476,10 +615,12 @@ img {
 @media (max-width: 375px) {
     .hero-title {
         font-size: 1.5rem !important;
+        color: white !important;
     }
     
     .hero-subtitle {
         font-size: 0.85rem !important;
+        color: white !important;
     }
     
     .hero-features {
@@ -498,6 +639,7 @@ img {
     
     .feature-item p {
         font-size: 0.7rem !important;
+        color: white !important;
     }
 }
 
@@ -511,11 +653,13 @@ img {
     .hero-title {
         font-size: 1.5rem !important;
         margin-bottom: 0.75rem !important;
+        color: white !important;
     }
     
     .hero-subtitle {
         font-size: 0.85rem !important;
         margin-bottom: 1rem !important;
+        color: white !important;
     }
     
     .hero-features {
@@ -564,6 +708,7 @@ img {
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     font-size: 2.5rem;
+    color: var(--text-dark);
 }
 
 .section-title::after {
@@ -582,6 +727,7 @@ img {
     max-width: 600px;
     margin: 0 auto;
     font-size: 1.1rem;
+    color: var(--text-light);
 }
 
 /* ===== ABOUT SECTION ===== */
@@ -1013,6 +1159,7 @@ img {
     display: flex;
     align-items: center;
     font-size: 0.9rem;
+    color: var(--text-dark);
 }
 
 .service-features i {
@@ -1040,6 +1187,14 @@ img {
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow);
+}
+
+.additional-services h3 {
+    color: white;
+}
+
+.additional-services p {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* ================= SIMPLE GALLERY STYLING ================= */
@@ -1169,6 +1324,10 @@ img {
 }
 
 /* ===== CLIENTS SECTION ===== */
+.clients-section {
+    background: white;
+}
+
 .clients-slider {
     display: flex;
     flex-wrap: wrap;
@@ -1368,6 +1527,7 @@ img {
     border-radius: 8px;
     font-size: 0.95rem;
     transition: var(--transition);
+    color: var(--text-dark);
 }
 
 .form-control:focus,
@@ -1386,11 +1546,557 @@ img {
 .cta-title {
     font-size: 1.8rem;
     margin-bottom: 0.75rem;
+    color: white;
 }
 
 .cta-text {
     font-size: 1rem;
     opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== MAPS SECTION - WHITE BACKGROUND ===== */
+.maps-section {
+    background: white;
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 0;
+}
+
+.maps-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.05) 0%, rgba(255, 107, 107, 0.03) 100%);
+    z-index: 1;
+}
+
+.maps-section > .container {
+    position: relative;
+    z-index: 2;
+}
+
+.maps-card {
+    background: white;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    height: 100%;
+    min-height: 400px;
+    transition: all 0.3s ease;
+}
+
+.maps-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-light);
+}
+
+.maps-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.maps-wrapper .ratio {
+    height: 100%;
+}
+
+.maps-wrapper iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+
+.maps-info {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem !important;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.maps-info:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-light);
+}
+
+.maps-title {
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--primary-light);
+}
+
+.info-item {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    background: var(--gray-bg);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-light);
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateX(5px);
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border-left-color: var(--primary-dark);
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+}
+
+.info-item h5 {
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.info-item p {
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.direction-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.direction-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-light);
+}
+
+.direction-card h4 {
+    color: var(--primary-dark);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    font-size: 1.4rem;
+}
+
+.direction-card p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.visit-cta {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 2rem;
+    border: 2px solid var(--primary-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.visit-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+}
+
+.visit-cta h3 {
+    color: var(--primary-dark);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.visit-cta p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Button Styles for Maps Section */
+.maps-info .btn-light {
+    background: var(--primary-light);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.maps-info .btn-light:hover {
+    background: var(--primary-dark);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
+}
+
+.maps-info .btn-success {
+    background: var(--whatsapp-green) !important;
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.maps-info .btn-success:hover {
+    background: #128C7E !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
+
+.direction-card .btn-outline-primary {
+    color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.direction-card .btn-outline-primary:hover {
+    background: var(--primary-dark);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.direction-card .btn-outline-success {
+    color: var(--whatsapp-green);
+    border-color: var(--whatsapp-green);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.direction-card .btn-outline-success:hover {
+    background: var(--whatsapp-green);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.visit-cta .btn-primary {
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 0.875rem 2rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+    border-radius: 8px;
+}
+
+.visit-cta .btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(139, 0, 0, 0.3);
+}
+
+.visit-cta .btn-success {
+    background: var(--whatsapp-green) !important;
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 0.875rem 2rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+    border-radius: 8px;
+}
+
+.visit-cta .btn-success:hover {
+    background: #128C7E !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+}
+
+/* Section Header untuk Maps */
+.maps-section .section-header {
+    margin-bottom: 3rem;
+}
+
+.maps-section .section-badge {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    color: white;
+    font-weight: 500;
+}
+
+.maps-section .section-title {
+    color: var(--text-dark);
+}
+
+.maps-section .section-title::after {
+    background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+}
+
+.maps-section .section-subtitle {
+    color: var(--text-light);
+}
+
+/* ===== RESPONSIVE MAPS SECTION ===== */
+@media (max-width: 992px) {
+    .maps-section {
+        padding: 3rem 0;
+    }
+    
+    .maps-info {
+        margin-top: 2rem;
+    }
+    
+    .visit-cta {
+        padding: 2rem;
+    }
+    
+    .visit-cta h3 {
+        font-size: 1.6rem;
+    }
+    
+    .maps-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .maps-section {
+        padding: 2.5rem 0;
+    }
+    
+    .maps-card {
+        min-height: 350px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .maps-wrapper iframe {
+        min-height: 350px;
+    }
+    
+    .maps-info {
+        padding: 1.75rem !important;
+    }
+    
+    .maps-title {
+        font-size: 1.5rem;
+    }
+    
+    .info-item {
+        padding: 1.125rem;
+        margin-bottom: 1rem;
+    }
+    
+    .info-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        margin-right: 0.875rem;
+    }
+    
+    .info-item h5 {
+        font-size: 1.05rem;
+    }
+    
+    .info-item p {
+        font-size: 0.9rem;
+    }
+    
+    .direction-card {
+        padding: 1.5rem;
+    }
+    
+    .direction-card h4 {
+        font-size: 1.3rem;
+    }
+    
+    .visit-cta {
+        padding: 1.75rem;
+    }
+    
+    .visit-cta h3 {
+        font-size: 1.5rem;
+    }
+    
+    .visit-cta p {
+        font-size: 1rem;
+    }
+    
+    .visit-cta .btn-primary,
+    .visit-cta .btn-success {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        margin: 0.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .maps-section {
+        padding: 2rem 0;
+    }
+    
+    .maps-card {
+        min-height: 300px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .maps-wrapper iframe {
+        min-height: 300px;
+    }
+    
+    .maps-info {
+        padding: 1.5rem !important;
+    }
+    
+    .maps-title {
+        font-size: 1.4rem;
+    }
+    
+    .info-item {
+        padding: 1rem;
+    }
+    
+    .info-icon {
+        margin-bottom: 0.75rem;
+    }
+    
+    .maps-info .d-flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .maps-info .btn-light,
+    .maps-info .btn-success {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .direction-card {
+        padding: 1.25rem;
+        text-align: center;
+    }
+    
+    .direction-card .d-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .direction-card .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .visit-cta {
+        padding: 1.5rem;
+    }
+    
+    .visit-cta h3 {
+        font-size: 1.3rem;
+    }
+    
+    .visit-cta p {
+        font-size: 0.95rem;
+    }
+    
+    .visit-cta .d-flex {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .visit-cta .btn-primary,
+    .visit-cta .btn-success {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 375px) {
+    .maps-card {
+        min-height: 280px;
+    }
+    
+    .maps-wrapper iframe {
+        min-height: 280px;
+    }
+    
+    .maps-info {
+        padding: 1.25rem !important;
+    }
+    
+    .maps-title {
+        font-size: 1.2rem;
+    }
+    
+    .info-item h5 {
+        font-size: 1rem;
+    }
+    
+    .visit-cta {
+        padding: 1.25rem;
+    }
+    
+    .visit-cta h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Animation for maps section */
+@keyframes fadeInUpMaps {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.maps-card,
+.maps-info,
+.direction-card,
+.visit-cta {
+    animation: fadeInUpMaps 0.6s ease-out;
+}
+
+.maps-info {
+    animation-delay: 0.1s;
+}
+
+.direction-card {
+    animation-delay: 0.2s;
+}
+
+.visit-cta {
+    animation-delay: 0.3s;
 }
 
 /* ===== FOOTER ===== */
@@ -1469,6 +2175,31 @@ img {
 .social-link:hover {
     background: var(--primary-light);
     transform: translateY(-3px);
+}
+
+/* ===== FOOTER LOGO ===== */
+.footer-logo-wrapper {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+    border: 2px solid var(--primary-light);
+}
+
+.footer-logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Hapus atau komentari .logo-circle yang lama di CSS footer */
+.logo-circle {
+    display: none; /* Atau hapus class ini dari HTML */
 }
 
 /* ===== BACK TO TOP ===== */
@@ -1609,6 +2340,7 @@ img {
         padding: 0.5rem 0 !important;
         margin: 0.25rem 0;
         font-size: 0.95rem;
+        color: var(--text-dark);
     }
     
     .nav-link::after {
