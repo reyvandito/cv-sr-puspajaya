@@ -100,7 +100,7 @@ img {
     background-color: var(--primary-light) !important;
 }
 
-/* ===== NAVBAR ===== */
+
 /* ===== NAVBAR ===== */
 .navbar {
     padding: 0.5rem 0;
@@ -274,6 +274,65 @@ img {
         width: 100%;
         text-align: center;
     }
+}
+
+/* ===== NAVBAR SCROLLSPY FIX ===== */
+.navbar .nav-link.active {
+    color: var(--primary-dark) !important;
+    font-weight: 600;
+}
+
+.navbar .nav-link.active::after {
+    width: 100% !important;
+}
+
+/* Mobile responsive active state */
+@media (max-width: 991px) {
+    .navbar .nav-link.active {
+        color: var(--primary-dark) !important;
+        background-color: rgba(139, 0, 0, 0.05);
+        border-radius: 5px;
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px; /* Height of navbar */
+}
+
+/* Ensure sections have proper offset */
+section {
+    scroll-margin-top: 70px;
+}
+
+/* Fix for Bootstrap ScrollSpy */
+body {
+    position: relative;
+}
+
+/* Active state animation */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
 }
 
 /* ===== HERO SECTION - FIXED FOR MOBILE ===== */

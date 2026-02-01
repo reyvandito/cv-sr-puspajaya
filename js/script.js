@@ -1,7 +1,7 @@
 // ============================================
 // WEBSITE CV SR PUSPA JAYA - SCRIPT.JS
 // ============================================
-// Versi: 2.0 - Responsif & Dioptimalkan
+// Versi: 2.1 - Fixed ScrollSpy & Navbar Active State
 // ============================================
 
 'use strict';
@@ -13,6 +13,10 @@ let currentImageIndex = 0;
 let galleryImages = [];
 let statsAnimated = false;
 let navbarCollapsed = false;
+let lastScrollTop = 0;
+let scrollTimeout;
+let currentActiveSection = 'home';
+let isScrolling = false;
 
 // ============================================
 // DOM READY & INITIALIZATION
@@ -27,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setCurrentYear();
         initNavbarResponsive();
         initSmoothScrolling();
-        initNavbarScroll();
+        initScrollSpy(); // FIXED: Mengganti initNavbarScroll dengan initScrollSpy
         initBackToTop();
         initSimpleLightbox();
         initFormValidation();
@@ -56,6 +60,113 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
+// CUSTOM SCROLLSPY FUNCTION - FIXED MAIN ISSUE
+// ============================================
+
+function initScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (sections.length === 0 || navLinks.length === 0) {
+        console.warn('⚠️ No sections or nav links found for ScrollSpy');
+        return;
+    }
+    
+    console.log(`📍 Found ${sections.length} sections for ScrollSpy`);
+    
+    // Tambahkan event listener untuk scroll dengan debounce
+    window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            isScrolling = true;
+            updateActiveNavLink();
+            
+            // Debounce untuk performance
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(function() {
+                isScrolling = false;
+            }, 100);
+        }
+    }, { passive: true });
+    
+    // Update active state pada load
+    updateActiveNavLink();
+    
+    // Update juga pada resize
+    window.addEventListener('resize', debounce(updateActiveNavLink, 250));
+    
+    // Log untuk debugging
+    console.log('🎯 Custom ScrollSpy initialized');
+}
+
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const scrollPosition = window.scrollY;
+    const navbarHeight = window.innerWidth < 768 ? 70 : 80; // Height navbar
+    
+    let currentSectionId = '';
+    let closestSectionId = '';
+    let closestDistance = Infinity;
+    
+    // Cari section yang sedang aktif berdasarkan viewport
+    sections.forEach(section => {
+        const sectionId = section.getAttribute('id');
+        const sectionTop = section.offsetTop - navbarHeight - 100; // Offset untuk deteksi awal
+        const sectionHeight = section.offsetHeight;
+        const sectionBottom = sectionTop + sectionHeight;
+        
+        // Jika scroll position berada di dalam section (dengan buffer)
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSectionId = sectionId;
+        }
+        
+        // Hitung jarak untuk mencari yang terdekat (fallback)
+        const distance = Math.abs(scrollPosition - sectionTop);
+        if (distance < closestDistance) {
+            closestDistance = distance;
+            closestSectionId = sectionId;
+        }
+    });
+    
+    // Gunakan section terdekat jika tidak ada yang aktif
+    if (!currentSectionId && closestSectionId) {
+        currentSectionId = closestSectionId;
+    }
+    
+    // Jika di paling atas, paksa ke home
+    if (scrollPosition < 100) {
+        currentSectionId = 'home';
+    }
+    
+    // Update active class hanya jika berubah
+    if (currentSectionId && currentSectionId !== currentActiveSection) {
+        currentActiveSection = currentSectionId;
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            
+            const href = link.getAttribute('href');
+            if (href === `#${currentSectionId}`) {
+                link.classList.add('active');
+                
+                // Untuk debugging
+                console.log(`📍 Active section changed to: ${currentSectionId}`);
+            }
+        });
+        
+        // Jika tidak ada yang active, set home sebagai default
+        const anyActive = Array.from(navLinks).some(link => link.classList.contains('active'));
+        if (!anyActive) {
+            const homeLink = document.querySelector('.nav-link[href="#home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+                currentActiveSection = 'home';
+            }
+        }
+    }
+}
+
+// ============================================
 // MOBILE DETECTION & RESPONSIVE HELPERS
 // ============================================
 
@@ -80,6 +191,9 @@ function initMobileDetection() {
         
         document.body.classList.toggle('mobile-device', nowMobile);
         document.body.classList.toggle('tablet-device', nowTablet);
+        
+        // Update scroll spy setelah resize
+        updateActiveNavLink();
     }, 250));
 }
 
@@ -99,7 +213,7 @@ function setCurrentYear() {
 }
 
 // ============================================
-// NAVBAR RESPONSIVE BEHAVIOR
+// NAVBAR RESPONSIVE BEHAVIOR - UPDATED
 // ============================================
 
 function initNavbarResponsive() {
@@ -129,16 +243,147 @@ function initNavbarResponsive() {
         document.body.style.overflow = '';
     });
     
-    // Navbar link klik untuk mobile
+    // Navbar link klik untuk mobile - dengan update active state
     const navLinks = navbarCollapse.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(e) {
+            // Update active state manual saat klik
+            document.querySelectorAll('.nav-link').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Update current active section
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                currentActiveSection = href.substring(1);
+            }
+            
+            // Tutup navbar di mobile
             if (window.innerWidth < 992) {
                 setTimeout(() => {
-                    navbarToggler.click();
+                    if (navbarToggler) {
+                        navbarToggler.click();
+                    }
                 }, 300);
             }
         });
+    });
+}
+
+// ============================================
+// SMOOTH SCROLLING - UPDATED WITH ACTIVE STATE
+// ============================================
+
+function initSmoothScrolling() {
+    // Smooth scrolling untuk semua anchor link
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Skip untuk link yang tidak perlu smooth scroll
+        if (anchor.hash === '#!' || anchor.hash === '#' || 
+            anchor.getAttribute('href') === '#lightbox' ||
+            anchor.getAttribute('data-no-scroll') === 'true') {
+            return;
+        }
+        
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            // Skip jika bukan anchor
+            if (!targetId.startsWith('#')) return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                
+                // Update active state secara manual
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+                currentActiveSection = targetId.substring(1);
+                
+                // Tutup navbar mobile jika terbuka
+                if (window.innerWidth < 992 && navbarCollapsed) {
+                    const navbarToggler = document.querySelector('.navbar-toggler');
+                    if (navbarToggler) {
+                        navbarToggler.click();
+                    }
+                }
+                
+                // Hitung offset berdasarkan device
+                const navbarHeight = window.innerWidth < 768 ? 70 : 80;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = targetPosition - navbarHeight;
+                
+                // Smooth scroll
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL tanpa refresh
+                history.pushState(null, null, targetId);
+                
+                console.log(`↕️ Scrolled to: ${targetId}, Active: ${currentActiveSection}`);
+                
+                // Panggil updateActiveNavLink setelah scroll selesai
+                setTimeout(updateActiveNavLink, 500);
+            }
+        });
+    });
+}
+
+// ============================================
+// BACK TO TOP BUTTON - UPDATED
+// ============================================
+
+function initBackToTop() {
+    const backToTop = document.querySelector('.back-to-top');
+    if (!backToTop) return;
+    
+    window.addEventListener('scroll', throttle(function() {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('active');
+            backToTop.setAttribute('aria-hidden', 'false');
+        } else {
+            backToTop.classList.remove('active');
+            backToTop.setAttribute('aria-hidden', 'true');
+        }
+    }, 150));
+    
+    // Click handler - dengan reset active state ke home
+    backToTop.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Update active state ke home
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        const homeLink = document.querySelector('.nav-link[href="#home"]');
+        if (homeLink) {
+            homeLink.classList.add('active');
+            currentActiveSection = 'home';
+        }
+        
+        // Smooth scroll ke atas
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Update URL
+        history.pushState(null, null, '#home');
+        
+        // Update active nav link setelah scroll
+        setTimeout(updateActiveNavLink, 500);
+        
+        // Fokus ke navbar brand setelah scroll
+        setTimeout(() => {
+            const navbarBrand = document.querySelector('.navbar-brand');
+            if (navbarBrand) {
+                navbarBrand.focus();
+            }
+        }, 500);
     });
 }
 
@@ -353,132 +598,7 @@ function handleSimpleKeydown(e) {
 }
 
 // ============================================
-// SMOOTH SCROLLING - DIOPTIMALKAN
-// ============================================
-
-function initSmoothScrolling() {
-    // Smooth scrolling untuk semua anchor link
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        // Skip untuk link yang tidak perlu smooth scroll
-        if (anchor.hash === '#!' || anchor.hash === '#' || 
-            anchor.getAttribute('href') === '#lightbox' ||
-            anchor.getAttribute('data-no-scroll') === 'true') {
-            return;
-        }
-        
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            
-            // Skip jika bukan anchor
-            if (!targetId.startsWith('#')) return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                
-                // Tutup navbar mobile jika terbuka
-                if (window.innerWidth < 992 && navbarCollapsed) {
-                    const navbarToggler = document.querySelector('.navbar-toggler');
-                    if (navbarToggler) {
-                        navbarToggler.click();
-                    }
-                }
-                
-                // Hitung offset berdasarkan device
-                const navbarHeight = window.innerWidth < 768 ? 70 : 80;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = targetPosition - navbarHeight;
-                
-                // Smooth scroll
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Update URL tanpa refresh (optional)
-                history.pushState(null, null, targetId);
-                
-                console.log(`↕️ Scrolled to: ${targetId}`);
-            }
-        });
-    });
-}
-
-// ============================================
-// NAVBAR SCROLL EFFECT
-// ============================================
-
-function initNavbarScroll() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
-    
-    let lastScrollTop = 0;
-    const navbarHeight = navbar.offsetHeight;
-    
-    window.addEventListener('scroll', throttle(function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Add/remove scrolled class
-        if (scrollTop > navbarHeight) {
-            navbar.classList.add('navbar-scrolled');
-        } else {
-            navbar.classList.remove('navbar-scrolled');
-        }
-        
-        // Hide/show navbar on scroll (mobile only)
-        if (window.innerWidth < 768) {
-            if (scrollTop > lastScrollTop && scrollTop > navbarHeight) {
-                // Scroll down - hide navbar
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                // Scroll up - show navbar
-                navbar.style.transform = 'translateY(0)';
-            }
-        }
-        
-        lastScrollTop = scrollTop;
-    }, 100));
-}
-
-// ============================================
-// BACK TO TOP BUTTON
-// ============================================
-
-function initBackToTop() {
-    const backToTop = document.querySelector('.back-to-top');
-    if (!backToTop) return;
-    
-    window.addEventListener('scroll', throttle(function() {
-        if (window.pageYOffset > 300) {
-            backToTop.classList.add('active');
-            backToTop.setAttribute('aria-hidden', 'false');
-        } else {
-            backToTop.classList.remove('active');
-            backToTop.setAttribute('aria-hidden', 'true');
-        }
-    }, 150));
-    
-    // Click handler
-    backToTop.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        
-        // Fokus ke navbar brand setelah scroll
-        setTimeout(() => {
-            const navbarBrand = document.querySelector('.navbar-brand');
-            if (navbarBrand) {
-                navbarBrand.focus();
-            }
-        }, 500);
-    });
-}
-
-// ============================================
-// CONTACT FORM VALIDATION - DIPERBAIKI
+// CONTACT FORM VALIDATION
 // ============================================
 
 function initFormValidation() {
@@ -616,6 +736,7 @@ function sanitizeInput(input) {
 function submitFormData(formData) {
     console.log('📤 Form data to submit:', formData);
     
+    const contactForm = document.getElementById('contactForm');
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalText = submitButton.innerHTML;
     const originalState = submitButton.disabled;
@@ -656,7 +777,7 @@ function submitFormData(formData) {
                 + `Layanan: ${formData.subject}%0A`
                 + `Pesan: ${formData.message}`;
             
-            window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+            window.open(`https://wa.me/6287813559019?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
         }
         
     }, 1500);
@@ -768,7 +889,7 @@ function initClientsSlider() {
 }
 
 // ============================================
-// CUSTOM ALERTS SYSTEM - DIPERBAIKI
+// CUSTOM ALERTS SYSTEM
 // ============================================
 
 function initCustomAlerts() {
@@ -1078,9 +1199,6 @@ function initWhatsAppButtons() {
         // Tambahkan event untuk tracking (optional)
         button.addEventListener('click', function() {
             console.log('📱 WhatsApp button clicked');
-            
-            // Anda bisa menambahkan analytics tracking di sini
-            // Contoh: gtag('event', 'whatsapp_click', { 'event_category': 'engagement' });
         });
     });
 }
@@ -1124,10 +1242,12 @@ window.addEventListener('resize', debounce(function() {
     // Update scroll margin
     setScrollMargin();
     
+    // Update navbar active state
+    updateActiveNavLink();
+    
     // Re-init components yang perlu responsive update
     const lightbox = document.getElementById('simple-lightbox');
     if (lightbox && lightbox.classList.contains('active')) {
-        // Adjust lightbox position jika terbuka
         updateSimpleLightbox();
     }
     
@@ -1177,13 +1297,15 @@ window.addEventListener('load', function() {
             }, 300);
         }, 500);
     }
+    
+    // Update active nav link setelah page fully loaded
+    setTimeout(updateActiveNavLink, 100);
 });
 
 // ============================================
 // EXPORT FUNCTIONS FOR GLOBAL USE
 // ============================================
 
-// Export fungsi ke global scope untuk HTML onclick attributes
 window.openSimpleLightbox = openSimpleLightbox;
 window.closeSimpleLightbox = closeSimpleLightbox;
 window.prevSimpleImage = prevSimpleImage;
