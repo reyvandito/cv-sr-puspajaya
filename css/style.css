@@ -1434,105 +1434,115 @@ body {
     margin: 0;
 }
 
-/* ===== CONTACT SECTION ===== */
-.contact-info-wrapper {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    height: 100%;
+/* ===== CONTACT SECTION STYLES - MODIFIED ===== */
+.consultation-card {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--primary-dark), var(--primary-light)) border-box;
+    animation: borderPulse 3s infinite;
 }
 
-.contact-info-card {
-    display: flex;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
+@keyframes borderPulse {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: var(--primary-light); }
 }
 
-.contact-info-card:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.contact-info-icon {
-    width: 45px;
-    height: 45px;
+.consultation-icon {
+    width: 80px;
+    height: 80px;
     background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
     color: white;
-    font-size: 1.1rem;
-    margin-right: 1rem;
+}
+
+.direct-contact-card {
+    transition: all 0.3s ease;
+    border: 2px solid var(--border-color) !important;
+}
+
+.direct-contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-light) !important;
+}
+
+.contact-icon {
+    color: inherit;
+}
+
+.icon-wrapper {
+    width: 40px;
+    height: 40px;
+    background: rgba(139, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
 }
 
-.contact-info-content {
-    flex: 1;
+.contact-details a {
+    color: var(--primary-dark);
+    transition: all 0.3s ease;
 }
 
-.contact-info-title {
+.contact-details a:hover {
+    color: var(--primary-light);
+    text-decoration: underline !important;
+}
+
+.cta-note p {
     font-size: 1rem;
-    margin-bottom: 0.5rem;
     color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.contact-info-text {
-    color: var(--text-light);
-    margin-bottom: 0;
-    line-height: 1.6;
-    font-size: 0.95rem;
+.btn-primary-dark {
+    background: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+    color: white !important;
 }
 
-.contact-form-wrapper {
-    height: 100%;
+.btn-primary-dark:hover {
+    background: var(--primary-light) !important;
+    border-color: var(--primary-light) !important;
 }
 
-.contact-form-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    height: 100%;
+.alert-info {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.1), rgba(139, 0, 0, 0.05));
+    border: 2px solid rgba(23, 162, 184, 0.3);
+    border-left: 5px solid var(--primary-dark);
 }
 
-.form-title {
-    font-size: 1.5rem;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-dark);
-    font-size: 0.95rem;
-}
-
-.form-control,
-.form-select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: var(--transition);
-    color: var(--text-dark);
-}
-
-.form-control:focus,
-.form-select:focus {
-    outline: none;
-    border-color: var(--primary-light);
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .consultation-card {
+        padding: 1.5rem !important;
+    }
+    
+    .consultation-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .direct-contact-card {
+        margin-bottom: 1rem;
+    }
+    
+    .cta-note p {
+        font-size: 0.9rem;
+        justify-content: flex-start;
+    }
+    
+    .contact-details {
+        padding: 1.25rem !important;
+    }
 }
 
 /* ===== CTA SECTION ===== */
